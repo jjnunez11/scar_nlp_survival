@@ -1,0 +1,5 @@
+Summary Statistics for the Token Count when Training Documents are Tokenized using BERT Tokenizer 
+Mean is 988.488967143734
+Median is 945.0
+Number >= 512 2188
+Percentage >= 512 0.07068781701289051

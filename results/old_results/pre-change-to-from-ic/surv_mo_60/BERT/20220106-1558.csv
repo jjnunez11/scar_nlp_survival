@@ -1,0 +1,26 @@
+epoch,acc,bal_acc,auc,prec,rec,f1,loss,epoch
+0,0.4384058117866516,0.5091941952705383,0.4844836890697479,0.38517841696739197,0.8034350872039795,0.5207173824310303,0.0,0.0
+1,0.655434787273407,0.645831823348999,0.7003384828567505,0.5413469672203064,0.6059160232543945,0.5718144774436951,0.0,1.0
+
+Run Arguments:
+cuda: True
+gpu: 0
+cuda_block: False
+epochs: 2
+batch_size: 8
+seed: 3435
+patience: 5
+log_every: 10
+imbalance_fix: loss_weight
+data_dir: C:\Users\jjnunez\PycharmProjects\scar_nlp_data\data
+results_dir: C:\Users\jjnunez\PycharmProjects\scar_nlp\results
+data_version: ppv4
+target: surv_mo_60
+dataset: SCAR
+debug: False
+max_tokens: 512
+lr: 0.0001
+weight_decay: 0
+pretrained_dir: C:\Users\jjnunez\PycharmProjects\hedwig-data\models
+pretrained_file: bert-base-uncased
+device: cuda:0

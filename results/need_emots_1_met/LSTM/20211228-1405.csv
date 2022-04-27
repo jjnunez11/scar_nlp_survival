@@ -1,0 +1,37 @@
+epoch,acc,bal_acc,auc,prec,rec,f1,loss
+0,0.6388888888888888,0.5,0.5,0.6388888888888888,0.6388888888888888,0.6388888888888888,0.5054130206505457
+1,0.6388888888888888,0.5,0.5,0.6388888888888888,0.6388888888888888,0.6388888888888888,0.5053665008809831
+2,0.6388888888888888,0.5,0.5,0.6388888888888888,0.6388888888888888,0.6388888888888888,0.5053126828538047
+3,0.6388888888888888,0.5,0.5,0.6388888888888888,0.6388888888888888,0.6388888888888888,0.5052046179771423
+4,0.6371527777777778,0.4986413043478261,0.4986413043478261,0.6371527777777778,0.6371527777777778,0.6371527777777778,0.5049941738446554
+5,0.6336805555555556,0.503239966555184,0.5032399665551839,0.6336805555555556,0.6336805555555556,0.6336805555555556,0.5045198533270094
+
+Run Arguments:
+cuda: True
+gpu: 0
+cuda_block: False
+epochs: 100
+batch_size: 32
+seed: 3435
+patience: 5
+log_every: 10
+imbalance_fix: loss_weight
+data_dir: C:\Users\jjnunez\PycharmProjects\scar_nlp_data\data
+results_dir: C:\Users\jjnunez\PycharmProjects\scar_nlp\results
+data_version: ppv4
+target: need_emots_1_met
+dataset: SCAR
+debug: False
+bidirectional: False
+num_layers: 2
+hidden_dim: 128
+mode: rand
+words_dim: 300
+embed_dim: 300
+weight_decay: 0
+dropout: 0.5
+lr: 0.0001
+pretrained_dir: C:\Users\jjnunez\PycharmProjects\hedwig-data\embeddings\word2vec
+pretrained_file: GoogleNews-vectors-negative300.txt
+results_path: results\reg_lstm
+device: cuda:0

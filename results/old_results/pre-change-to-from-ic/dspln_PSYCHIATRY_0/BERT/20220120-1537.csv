@@ -1,0 +1,25 @@
+epoch,acc,bal_acc,auc,prec,rec,f1,loss,epoch
+0,0.9627718925476074,0.4911899268627167,0.5478556752204895,0.0,0.0,0.0,0.0,0.0
+
+Run Arguments:
+cuda: True
+gpu: 0
+cuda_block: False
+epochs: 1
+batch_size: 8
+seed: 3435
+patience: 5
+log_every: 10
+imbalance_fix: undersampling
+data_dir: C:\Users\jjnunez\PycharmProjects\scar_nlp_data\data
+results_dir: C:\Users\jjnunez\PycharmProjects\scar_nlp\results
+data_version: ppv4
+target: dspln_PSYCHIATRY_0
+dataset: SCAR
+debug: False
+max_tokens: 50
+lr: 0.0001
+weight_decay: 0
+pretrained_dir: C:\Users\jjnunez\PycharmProjects\hedwig-data\models
+pretrained_file: bert-base-uncased
+device: cuda:0

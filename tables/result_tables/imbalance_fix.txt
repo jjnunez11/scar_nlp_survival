@@ -1,0 +1,8 @@
+BoW & Undersampling & 0.8 & 0.73 & 0.73 & 0.11 & 0.06 & 0.66 \\
+BoW & Weighted Loss & 0.8 & 0.73 & 0.73 & 0.11 & 0.06 & 0.66 \\
+CNN & Undersampling & 0.87 & 0.69 & 0.78 & 0.13 & 0.07 & 0.5 \\
+CNN & Weighted Loss & 0.83 & 0.73 & 0.8 & 0.12 & 0.07 & 0.63 \\
+LSTM & Undersampling & 0.98 & 0.5 & 0.43 & 0.0 & 0.0 & 0.0 \\
+LSTM & Weighted Loss & 0.58 & 0.63 & 0.71 & 0.06 & 0.03 & 0.7 \\
+BERT & Undersampling & 0.79 & 0.67 & 0.7 & 0.09 & 0.05 & 0.54 \\
+BERT & Weighted Loss & 0.73 & 0.68 & 0.73 & 0.08 & 0.04 & 0.63 \\

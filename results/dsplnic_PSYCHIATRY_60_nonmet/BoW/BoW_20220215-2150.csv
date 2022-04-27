@@ -1,0 +1,35 @@
+epoch,acc,bal_acc,auc,prec,rec,spec,f1,loss,ppv,npv,tp,fp,tn,fn
+0,0.7915360331535339,0.7557618618011475,0.7557618021965027,0.05569007247686386,0.71875,0.7927736639976501,0.1033707857131958,0.0,0.05569007263922518,0.9940039973351099,23.0,390.0,1492.0,9.0
+
+Run Arguments:
+cuda: True
+gpu: 0
+cuda_block: False
+epochs: 1
+seed: 3435
+patience: 5
+monitor_metric: bal_acc
+log_every: 10
+imbalance_fix: loss_weight
+data_dir: C:\Users\jjnunez\PycharmProjects\scar_nlp_data\data
+results_dir: C:\Users\jjnunez\PycharmProjects\scar_nlp\results
+data_version: ppv4
+target: dsplnic_PSYCHIATRY_60_nonmet
+table: compare_stages
+table_extra: I+II+III & 13422
+dataset: SCAR
+debug: False
+max_tokens: 5000
+use_idf: True
+classifier: l2logreg
+rf_estimators: 50
+elnet_l1_ratio: 0.67
+elnet_alpha: 0.1
+elnet_power_t: 0.01
+gbdt_estimators: 100
+gbdt_lr: 0.1
+gbdt_max_depth: 3
+l2logreg_c: 0.2
+run_name: BoW_20220215-2150
+results_dir_target: C:\Users\jjnunez\PycharmProjects\scar_nlp\results\dsplnic_PSYCHIATRY_60_nonmet
+results_dir_model: C:\Users\jjnunez\PycharmProjects\scar_nlp\results\dsplnic_PSYCHIATRY_60_nonmet\BoW

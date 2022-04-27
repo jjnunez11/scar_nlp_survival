@@ -1,0 +1,35 @@
+epoch,acc,bal_acc,auc,prec,rec,spec,f1,loss,ppv,npv,tp,fp,tn,fn
+0,0.8184782862663269,0.8109349608421326,0.8109349012374878,0.7516099214553833,0.7795801758766174,0.8422897458076477,0.7653395533561707,0.0,0.7516099356025759,0.8619246861924686,817.0,270.0,1442.0,231.0
+
+Run Arguments:
+cuda: True
+gpu: 0
+cuda_block: False
+epochs: 1
+batch_size: 8
+seed: 3435
+patience: 10
+monitor_metric: bal_acc
+log_every: 10
+imbalance_fix: loss_weight
+data_dir: C:\Users\jjnunez\PycharmProjects\scar_nlp_data\data
+results_dir: C:\Users\jjnunez\PycharmProjects\scar_nlp\results
+data_version: ppv4
+target: surv_mo_60
+table: bow_c_choose
+dataset: SCAR
+debug: False
+max_tokens: 5000
+use_idf: True
+classifier: l2logreg
+rf_estimators: 50
+elnet_l1_ratio: 0.67
+elnet_alpha: 0.1
+elnet_power_t: 0.01
+gbdt_estimators: 100
+gbdt_lr: 0.1
+gbdt_max_depth: 3
+l2logreg_c: 0.1
+run_name: BoW_20220201-1509
+results_dir_target: C:\Users\jjnunez\PycharmProjects\scar_nlp\results\surv_mo_60
+results_dir_model: C:\Users\jjnunez\PycharmProjects\scar_nlp\results\surv_mo_60\BoW

@@ -1,0 +1,5 @@
+Datetime,Platform,Model,Target,Data,Mode,Pretrained Model,Embedding Dimension,Word Dimension,BoW Classifier,CNN Output Channels,LSTM Layers,LSTM Hidden Dimension,LSTM Bidirectional,CUDA Blocking,Epochs,Learning Rate,Patience,Class Imbalance Fix,Accuracy,Balanced Accuracy,AUC,F1
+20211211-1423,SCAR_NLP,BoW,dsplnmulti_PSYCHIATRY_2,ppv4,,,,,rf,,,,,0.0,10.0,,5.0,loss_weight,0.9876653958286612,0.5,0.5,0.9876653958286612
+20211211-1428,SCAR_NLP,BoW,dsplnmulti_PSYCHIATRY_2,ppv4,,,,,rf,,,,,False,10.0,,5.0,loss_weight,0.9876653958286612,0.5,0.5,0.9876653958286612
+20211211-2051,SCAR_NLP,LSTM,dsplnmulti_PSYCHIATRY_2,ppv4,rand,GoogleNews-vectors-negative300.txt,300.0,300.0,,,2.0,128.0,False,False,100.0,0.0001,5.0,loss_weight,0.6641066184775243,0.6414330865840472,0.6414330865840472,0.6641066184775243
+20211212-0203,SCAR_NLP,CNN,dsplnmulti_PSYCHIATRY_2,ppv4,rand,GoogleNews-vectors-negative300.txt,300.0,300.0,,500.0,,,,False,100.0,1e-05,5.0,loss_weight,0.9397888115030331,0.6822483249234842,0.6822483249234842,0.9397888115030331

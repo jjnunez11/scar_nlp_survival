@@ -1,0 +1,38 @@
+epoch,acc,bal_acc,auc,prec,rec,spec,f1,loss,ppv,npv,tp,fp,tn,fn,epoch
+0,0.01838977262377739,0.5,0.4143834114074707,0.01838977262377739,1.0,0.0,0.036115389317274094,0.0,0.01838977262377739,0.0,82.0,4377.0,0.0,0.0,0.0
+1,0.053150929510593414,0.49975618720054626,0.4236251711845398,0.01838064193725586,0.9634146094322205,0.03609778359532356,0.03607305884361267,0.0,0.01838064193725586,0.9813664555549622,79.0,4219.0,158.0,3.0,1.0
+2,0.9816102385520935,0.5,0.4444658160209656,0.0,0.0,1.0,0.0,0.0,0.0,0.9816102385520935,0.0,0.0,4377.0,82.0,2.0
+3,0.9816102385520935,0.5,0.4753492474555969,0.0,0.0,1.0,0.0,0.0,0.0,0.9816102385520935,0.0,0.0,4377.0,82.0,3.0
+4,0.9816102385520935,0.5,0.5125991106033325,0.0,0.0,1.0,0.0,0.0,0.0,0.9816102385520935,0.0,0.0,4377.0,82.0,4.0
+5,0.9816102385520935,0.5,0.5432164669036865,0.0,0.0,1.0,0.0,0.0,0.0,0.9816102385520935,0.0,0.0,4377.0,82.0,5.0
+
+Run Arguments:
+cuda: True
+gpu: 0
+cuda_block: False
+epochs: 100
+seed: 3435
+patience: 5
+monitor_metric: bal_acc
+log_every: 10
+imbalance_fix: undersampling
+data_dir: C:\Users\jjnunez\PycharmProjects\scar_nlp_data\data
+results_dir: C:\Users\jjnunez\PycharmProjects\scar_nlp\results
+data_version: ppv4
+target: dsplnic_PSYCHIATRY_60
+table: compare_token_len
+table_extra: 256
+dataset: SCAR
+debug: False
+load_ckpt: 
+lr: 1e-05
+weight_decay: 0
+max_tokens: 256
+batch_size: 1
+attention_window: 512
+pretrained_dir: 
+pretrained_file: allenai/longformer-base-4096
+device: cuda:0
+run_name: Longformer_20220226-1029
+results_dir_target: C:\Users\jjnunez\PycharmProjects\scar_nlp\results\dsplnic_PSYCHIATRY_60
+results_dir_model: C:\Users\jjnunez\PycharmProjects\scar_nlp\results\dsplnic_PSYCHIATRY_60\Longformer

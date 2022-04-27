@@ -1,0 +1,35 @@
+epoch,acc,bal_acc,auc,prec,rec,spec,f1,loss,ppv,npv,tp,fp,tn,fn
+0,0.6342229247093201,0.6314171552658081,0.6314171552658081,0.6888796091079712,0.6516942381858826,0.6111400127410889,0.6697712540626526,0.0,0.6888796334860475,0.5704567541302236,1654.0,747.0,1174.0,884.0
+
+Run Arguments:
+cuda: True
+gpu: 0
+cuda_block: False
+epochs: 1
+batch_size: 8
+seed: 3435
+patience: 5
+monitor_metric: bal_acc
+log_every: 10
+imbalance_fix: loss_weight
+data_dir: C:\Users\jjnunez\PycharmProjects\scar_nlp_data\data
+results_dir: C:\Users\jjnunez\PycharmProjects\scar_nlp\results
+data_version: ppv4
+target: need_emots_1
+table: need_emots_dif_n
+dataset: SCAR
+debug: False
+max_tokens: 5000
+use_idf: True
+classifier: l2logreg
+rf_estimators: 50
+elnet_l1_ratio: 0.67
+elnet_alpha: 0.1
+elnet_power_t: 0.01
+gbdt_estimators: 100
+gbdt_lr: 0.1
+gbdt_max_depth: 3
+l2logreg_c: 0.2
+run_name: BoW_20220209-0836
+results_dir_target: C:\Users\jjnunez\PycharmProjects\scar_nlp\results\need_emots_1
+results_dir_model: C:\Users\jjnunez\PycharmProjects\scar_nlp\results\need_emots_1\BoW

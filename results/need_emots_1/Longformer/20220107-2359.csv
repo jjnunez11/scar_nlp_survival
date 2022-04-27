@@ -1,0 +1,26 @@
+epoch,acc,bal_acc,auc,prec,rec,f1,loss,epoch
+0,0.563355028629303,0.49683940410614014,0.47498923540115356,0.567604660987854,0.9775413870811462,0.7181937098503113,0.0,0.0
+
+Run Arguments:
+cuda: True
+gpu: 0
+cuda_block: False
+epochs: 1
+batch_size: 1
+seed: 3435
+patience: 5
+log_every: 10
+imbalance_fix: loss_weight
+data_dir: C:\Users\jjnunez\PycharmProjects\scar_nlp_data\data
+results_dir: C:\Users\jjnunez\PycharmProjects\scar_nlp\results
+data_version: ppv4
+target: need_emots_1
+dataset: SCAR
+debug: False
+load_ckpt: 
+lr: 0.0001
+weight_decay: 0
+max_tokens: 2048
+attention_window: 512
+pretrained_file: allenai/longformer-base-4096
+device: cuda:0
