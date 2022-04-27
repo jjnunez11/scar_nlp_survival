@@ -2,13 +2,15 @@
 
 By John-Jose Nunez
 
-For the UBC MSc thesis [Predicting the Psychosocial Needs of Cancer Patients using Neural Language models](https://open.library.ubc.ca/soa/cIRcle/collections/ubctheses/24/items/1.0412909)
+For the forthcoming paper:  [Title](https://url)
 
-Fresh implementation of NLP methods to predict cancer needs and survival using physician documents. Most of the data processing and selection
+Implementation of NLP methods to predict cancer needs and survival using physician documents. Most of the data processing and selection
 was done in the scar_nlp_data and scar repos, also located on my Github. 
 
 Loosely based on the hedwig NLP repo, but starting fresh due to the large changes
 in  PyTorch 1.9.0 and especially torchtext 0.10.0
+
+Forked from the Github repo used for my thesis, jjnunez\scar_nlp
 
 # Training/Fine-tuning NLP Models
 
