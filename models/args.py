@@ -17,7 +17,7 @@ def get_args():
                         help='How to deal with the class imbalance in our dataset')
     parser.add_argument('--data-dir',
                         default=os.path.join(r'C:\Users\jjnunez\PycharmProjects', 'scar_nlp_data', 'data'))
-    parser.add_argument('--results-dir', default=os.path.join(r'C:\Users\jjnunez\PycharmProjects\scar_nlp', 'results'))
+    parser.add_argument('--results-dir', default=os.path.join(r'C:\Users\jjnunez\PycharmProjects\scar_nlp_survival', 'results'))
     parser.add_argument('--data-version', type=str, default='ppv4',
                         help='Version of preprocessing used for this dataset')
     parser.add_argument('--target', type=str, help='The specific target for the prediction')

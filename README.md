@@ -1,4 +1,4 @@
-# Prediction of Cancer Needs Using NLP with Physician Documents
+# Predicting a Cancer Patient's Survival Using Natural Language Processing with their First Oncologist Document
 
 By John-Jose Nunez
 
