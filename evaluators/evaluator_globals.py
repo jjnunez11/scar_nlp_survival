@@ -4,8 +4,6 @@ ARGS_COL_MAP = {
     'embed_dim': 'Embedding Dimension',
     'words_dim': 'Word Dimension',
     'epochs': 'Epochs',
-    'num_layers': 'LSTM Layers',
-    'hidden_dim': 'LSTM Hidden Dimension',
     'l2logreg_c': 'BoW LR C',
     'lr': 'Learning Rate',
     'patience': 'Patience',
@@ -13,23 +11,28 @@ ARGS_COL_MAP = {
     'cuda_block': 'CUDA Blocking',
     'imbalance_fix': 'Class Imbalance Fix',
     'data_version': 'Data',
-    'bidirectional': 'LSTM Bidirectional',
     'classifier': 'BoW Classifier',
     'max_tokens': 'Max Tokens',
+    'dropout': 'Dropout',
     # CNN hyper-parameters
     'output_channel': 'CNN Output Channels',
     'weight_decay': 'CNN Weight Decay',
-    'dropout': 'CNN Dropout'
+    # LSTM hyper-parameters
+    'bidirectional': 'LSTM Bidirectional',
+    'num_layers': 'LSTM Layers',
+    'hidden_dim': 'LSTM Hidden Dimension',
+    'embed-droprate': 'LSTM Embed Dropout',
+    'wdrop': 'LSTM Wt Dropout'
 }
 
 CUSTOM_COLS = ['acc', 'bal_acc']
 
 # The desired order of the columns, just for aesthetics
 COLS_IN_ORDER = ['Run Name', 'Finished', 'Table', 'Platform', 'Model', 'Target',
-                 'Data', 'Mode', 'Pretrained Model', 'Embedding Dimension', 'Word Dimension',
+                 'Data', 'Mode', 'Pretrained Model', 'Embedding Dimension', 'Word Dimension', 'Dropout',
                  'BoW Classifier', 'BoW LR C',
-                 'CNN Output Channels', 'CNN Weight Decay', 'CNN Dropout',
-                 'LSTM Layers', 'LSTM Hidden Dimension', 'LSTM Bidirectional',
+                 'CNN Output Channels', 'CNN Weight Decay',
+                 'LSTM Layers', 'LSTM Hidden Dimension', 'LSTM Bidirectional', 'LSTM Wt Dropout', 'LSTM Embed Dropout',
                  'Max Tokens',
                  'CUDA Blocking', 'Epochs', 'Learning Rate', 'Patience', 'Class Imbalance Fix',
                  'Accuracy', 'Balanced Accuracy', 'AUC', 'F1', 'Recall', 'Precision', 'Specificity',
