@@ -4,8 +4,8 @@ from subprocess import check_output
 table = "lstm_tuning"
 target = "surv_mo_60"
 # Do we need bidirectional? Is it working wit bool?
-num_layers = [1, 2]
-hidden_dim = [256, 512, 1024]
+num_layers = [1]
+hidden_dim = [256, 512]
 dropouts = [0.1, 0.2, 0.5, 0.8]
 embed_droprates = [0.05, 0.1, 0.15]
 wdrops = [0.1, 0.2, 0.3]

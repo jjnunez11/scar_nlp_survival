@@ -21,7 +21,7 @@ ARGS_COL_MAP = {
     'bidirectional': 'LSTM Bidirectional',
     'num_layers': 'LSTM Layers',
     'hidden_dim': 'LSTM Hidden Dimension',
-    'embed-droprate': 'LSTM Embed Dropout',
+    'embed_droprate': 'LSTM Embed Dropout',
     'wdrop': 'LSTM Wt Dropout'
 }
 
