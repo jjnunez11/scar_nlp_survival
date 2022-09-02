@@ -13,11 +13,11 @@ def get_args():
     parser.add_argument('--words-dim', type=int, default=300)
     parser.add_argument('--embed-dim', type=int, default=300)
     parser.add_argument('--weight-decay', type=float, default=0)
-    parser.add_argument('--dropout', type=float, default=0.5)
-    parser.add_argument('--lr', type=float, default=0.00001)
+    parser.add_argument('--dropout', type=float, default=0.2)  # Thesis was 0.5
+    parser.add_argument('--lr', type=float, default=0.00005)  # Thesis was 0.00001
     parser.add_argument('--batch-size', type=int, default=16)
-    parser.add_argument('--embed-droprate', type=float, default=0.1, help="embedding dropout")
-    parser.add_argument('--wdrop', type=float, default=0.2, help="weight drop")
+    parser.add_argument('--embed-droprate', type=float, default=0.2, help="embedding dropout")  # thesis was 0.1
+    parser.add_argument('--wdrop', type=float, default=0.3, help="weight drop")  # thesis was 0.3
 
     # Extra arguments from Hedwig that we can implement if desired
     # TODO_ parser.add_argument('--bottleneck-layer', action='store_true')
