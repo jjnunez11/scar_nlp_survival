@@ -45,7 +45,7 @@ def generate_result_table(table):
         s = re.sub(f"\n\s*", "", s)
 
         # Replace latex horizontal cell separator with specified
-        s = re.sub(r"\&", horiz_sp, s)
+        s = re.sub(r"\s\&\s", horiz_sp, s)
 
         # Replace latex vertical cell separator with specified
         s = re.sub(r"\s\\\\", vert_sp, s)
@@ -74,16 +74,13 @@ if __name__ == "__main__":
     # generate_result_table("imbalance_fix")
     # generate_result_table("compare_stages_emots")
 
-    if False:
+    if True:  # all tables for paper
         # Tables involving LSTM
-        generate_result_table('see_psych')
-        generate_result_table('see_counselling')
-        generate_result_table('need_emots_all_models')
-        generate_result_table('need_infos_all_models')
         generate_result_table('survival_all_models')
+        generate_result_table('survival_dif_lengths')
 
     # generate_result_table("compare_token_len")
-    generate_result_table("lstm_tuning")
+    # generate_result_table("lstm_tuning")
 
     print("Printed table LaTeX string to file!")
 

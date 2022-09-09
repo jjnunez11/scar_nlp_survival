@@ -11,8 +11,8 @@ def get_args():
     parser.add_argument('--output-channel', type=int, default=500)
     parser.add_argument('--words-dim', type=int, default=300)
     parser.add_argument('--embed-dim', type=int, default=300)
-    parser.add_argument('--dropout', type=float, default=0.5)
-    parser.add_argument('--lr', type=float, default=0.00001)
+    parser.add_argument('--dropout', type=float, default=0.8)  # thesis default 0.5
+    parser.add_argument('--lr', type=float, default=0.00005)  # thesis default 0.00001
     # TODO_ parser.add_argument('--epoch-decay', type=int, default=15)
     parser.add_argument('--weight-decay', type=float, default=0)
     parser.add_argument('--pretrained-dir', default=os.path.join(r"C:\Users\jjnunez\PycharmProjects", 'hedwig-data', 'embeddings', 'word2vec'))
