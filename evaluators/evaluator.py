@@ -124,23 +124,24 @@ class Evaluator(object):
 
         # Put in a string with results formatted for LaTeX
         # Some tables need an extra column, include that if it exists
+        decimals = 3
         if self.table_extra == '':
             latex_string = " & ".join([self.model_name,
-                                       str(round(best_bal_acc_epoch['acc'], 2)),
-                                       str(round(best_bal_acc_epoch['bal_acc'], 2)),
-                                       str(round(best_bal_acc_epoch['auc'], 2)),
-                                       str(round(best_bal_acc_epoch['f1'], 2)),
-                                       str(round(best_bal_acc_epoch['prec'], 2)),
-                                       str(round(best_bal_acc_epoch['rec'], 2))])
+                                       str(round(best_bal_acc_epoch['acc'], decimals)),
+                                       str(round(best_bal_acc_epoch['bal_acc'], decimals)),
+                                       str(round(best_bal_acc_epoch['auc'], decimals)),
+                                       str(round(best_bal_acc_epoch['f1'], decimals)),
+                                       str(round(best_bal_acc_epoch['prec'], decimals)),
+                                       str(round(best_bal_acc_epoch['rec'], decimals))])
         else:
             latex_string = " & ".join([self.model_name,
                                        self.table_extra,
-                                       str(round(best_bal_acc_epoch['acc'], 2)),
-                                       str(round(best_bal_acc_epoch['bal_acc'], 2)),
-                                       str(round(best_bal_acc_epoch['auc'], 2)),
-                                       str(round(best_bal_acc_epoch['f1'], 2)),
-                                       str(round(best_bal_acc_epoch['prec'], 2)),
-                                       str(round(best_bal_acc_epoch['rec'], 2))])
+                                       str(round(best_bal_acc_epoch['acc'], decimals)),
+                                       str(round(best_bal_acc_epoch['bal_acc'], decimals)),
+                                       str(round(best_bal_acc_epoch['auc'], decimals)),
+                                       str(round(best_bal_acc_epoch['f1'], decimals)),
+                                       str(round(best_bal_acc_epoch['prec'], decimals)),
+                                       str(round(best_bal_acc_epoch['rec'], decimals))])
 
         latex_string = latex_string + r" \\"
         print(latex_string)
