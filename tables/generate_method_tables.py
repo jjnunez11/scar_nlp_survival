@@ -7,45 +7,6 @@ Table generation. Adapted from thesis but to output Google doc compliant tables,
 """
 
 
-
-
-
-def generate_dspln_label_table():
-    f = open(os.path.join(METHOD_TABLES_DIR, "dspln_label" + ".txt"), "w")
-
-    f.write("Psychiatry & " + get_label_balance("dsplnic_PSYCHIATRY_60"))
-    f.write("\n")
-    f.write("Counselling & " + get_label_balance("dsplnic_SOCIALWORK_60"))
-
-    f.close()
-
-
-def generate_need_label_table():
-    f = open(os.path.join(METHOD_TABLES_DIR, "need_label" + ".txt"), "w")
-
-    f.write("Emotional & 1 & " + get_label_balance("need_emots_1") + "\n")
-    f.write("Emotional & 2 & " + get_label_balance("need_emots_2") + "\n")
-    f.write("Emotional & 3 & " + get_label_balance("need_emots_3") + "\n")
-    f.write("Emotional & 4 & " + get_label_balance("need_emots_4") + "\n")
-    f.write("Emotional & 5 & " + get_label_balance("need_emots_5") + "\n")
-    f.write("Informational & 1 & " + get_label_balance("need_infos_1") + "\n")
-    f.write("Informational & 2 & " + get_label_balance("need_infos_2") + "\n")
-    f.write("Informational & 3 & " + get_label_balance("need_infos_3") + "\n")
-    f.write("Informational & 4 & " + get_label_balance("need_infos_4") + "\n")
-
-    f.close()
-
-
-def generate_survival_label_table():
-    f = open(os.path.join(METHOD_TABLES_DIR, "survival_label" + ".txt"), "w")
-
-    f.write("6 & " + get_label_balance("survic_mo_6", True) + "\n")
-    f.write("36 & " + get_label_balance("survic_mo_36", True) + "\n")
-    f.write("60 & " + get_label_balance("survic_mo_60", True) + "\n")
-
-    f.close()
-
-
 def generate_pt_demo_table():
     filename = PT_DATA_FILE
 
@@ -55,6 +16,11 @@ def generate_pt_demo_table():
 
     horiz_sp = "\t"  # What to separate columns
     vert_sp = "\n"  # What to place at the end of the line to seperate rows vertically
+
+    df_died = df.copy(deep=True)
+    df_died = df_died.loc[df_died["died"]]
+    print(f'len of df_died: {df_died.index.size}')
+    assert(df_died.index.size > 0)
 
     def get_label_balance(label_name, with_total=False):
         root = LABEL_DIR
@@ -70,7 +36,7 @@ def generate_pt_demo_table():
         if with_total:
             label_balance_str = f"{n_zero} ({perc_zero}){horiz_sp}{n_one} ({perc_one}){horiz_sp}{n_pts}{vert_sp}"
         else:
-            label_balance_str = f"{n_zero} ({perc_zero}){horiz_sp}({perc_one}){vert_sp}"
+            label_balance_str = f"{n_zero} ({perc_zero}){horiz_sp}{n_one} ({perc_one}){vert_sp}"
 
         return label_balance_str
 
@@ -98,20 +64,20 @@ def generate_pt_demo_table():
     f.write(f"Stage III{horiz_sp}" + get_n_perc(df, "stage", "III", total_n))
     f.write(f"Stage IV{horiz_sp}" + get_n_perc(df, "stage", "IV", total_n))
     f.write(f"Unknown Stage{horiz_sp}" + get_n_perc(df, "stage", "", total_n))
-    f.write(vert_sp)
+    # f.write(vert_sp)
     f.write(f"{horiz_sp}Mean{horiz_sp}Standard Deviation{vert_sp}")
     f.write(f'Age at Diagnosis{horiz_sp}' + get_mean_std(df, "age_at_diagnosis"))
-    f.write(f'Months Survived since Diagnosis{horiz_sp}' + get_mean_std(df, "mo_survived"))
-    f.write(f'Months Survived since Document{horiz_sp}' + get_mean_std(df, "mo_survived_since_initial_consult"))
-    f.write(vert_sp)
+    f.write(f'Observed Months Survived since Diagnosis{horiz_sp}' + get_mean_std(df, "mo_survived"))
+    f.write(f'Observed Months Survived since Document{horiz_sp}' + get_mean_std(df, "mo_survived_since_initial_consult"))
+    f.write(f'Months Survived since Diagnosis of those who Died{horiz_sp}' + get_mean_std(df_died, "mo_survived"))
+    f.write(f'Months Survived since Document of those who Died{horiz_sp}' + get_mean_std(df_died, "mo_survived_since_initial_consult"))
+    # f.write(vert_sp)
     f.write(f"{horiz_sp}Did not Survive (%){horiz_sp}Survived (%){vert_sp}")
     f.write(f"6 Months{horiz_sp}" + get_label_balance("surv_mo_6", False))
     f.write(f"36 Months{horiz_sp} " + get_label_balance("surv_mo_36", False))
     f.write(f"60 Months{horiz_sp} " + get_label_balance("surv_mo_60", False))
 
     f.close()
-
-    print(len(df.index))
 
 
 if __name__ == "__main__":

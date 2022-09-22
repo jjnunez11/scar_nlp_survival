@@ -8,6 +8,9 @@
 :: python -m models.cnn --target "surv_mo_36" --table "survival_dif_lengths" --table_extra "36"
 :: python -m models.cnn --target "surv_mo_60" --table "survival_dif_lengths" --table_extra "60"
 
-python -m models.lstm --target "surv_mo_6" --table "survival_dif_lengths" --table_extra "6"
-python -m models.lstm --target "surv_mo_36" --table "survival_dif_lengths" --table_extra "36"
-python -m models.lstm --target "surv_mo_60" --table "survival_dif_lengths" --table_extra "60"
+:: python -m models.lstm --target "surv_mo_6" --table "survival_dif_lengths" --table_extra "6"
+:: python -m models.lstm --target "surv_mo_36" --table "survival_dif_lengths" --table_extra "36"
+:: python -m models.lstm --target "surv_mo_60" --table "survival_dif_lengths" --table_extra "60"
+
+python -m models.bow --target "surv_mo_60" --table "after_remov_dsplns" --epochs 1 --table_extra "60"
+python -m models.cnn --target "surv_mo_60" --table "after_remov_dsplns" --table_extra "60"
