@@ -126,6 +126,7 @@ class BERT(pl.LightningModule):
         return loss
 
     def configure_optimizers(self):
+        print(f'Here is our weight decay: {self.weight_decay}')
         optimizer = AdamW(self.parameters(), lr=self.lr, weight_decay=self.weight_decay)
         warmup_steps = self.steps_per_epoch // 3
         total_steps = self.steps_per_epoch * self.n_epochs - warmup_steps
