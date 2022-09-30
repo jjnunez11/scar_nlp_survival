@@ -7,7 +7,7 @@ def get_args():
                         help="Maximum number of tokens to use with BERT, max 512")
 
     parser.add_argument('--lr', type=float, default=0.00005)  # thesis 0.00001
-    parser.add_argument('--weight-decay', type=float, default=0)
+    parser.add_argument('--weight-decay', type=float, default=0.001)  # thesis 0
     parser.add_argument('--batch-size', type=int, default=8)
 
     # Directory to import in pretrained BERT model

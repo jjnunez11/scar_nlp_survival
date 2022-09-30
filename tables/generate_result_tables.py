@@ -75,7 +75,6 @@ if __name__ == "__main__":
     # generate_result_table("compare_stages_emots")
 
     if True:  # all tables for paper
-        # Tables involving LSTM
         generate_result_table('survival_all_models')
         generate_result_table('survival_dif_lengths')
 
