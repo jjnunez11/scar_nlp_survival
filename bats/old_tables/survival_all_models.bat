@@ -5,3 +5,5 @@ python -m models.bow --target "surv_mo_60" --table "survival_all_models" --epoch
 python -m models.cnn --target "surv_mo_60" --table "survival_all_models"
 python -m models.lstm --target "surv_mo_60" --table "survival_all_models"
 python -m models.bert --target "surv_mo_60" --batch-size 8 --table "survival_all_models"
+
+:: READY TO RUN

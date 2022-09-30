@@ -21,6 +21,7 @@ class BERT(pl.LightningModule):
         self.n_epochs = config.epochs
         self.lr = config.lr
         self.loss_fn = loss_fn
+        self.weight_decay = config.weight_decay
         # self.device = config.device  # pl seems to default send to cuda:0, using this for metrics
 
         # Initialize the metrics
@@ -125,7 +126,8 @@ class BERT(pl.LightningModule):
         return loss
 
     def configure_optimizers(self):
-        optimizer = AdamW(self.parameters(), lr=self.lr)
+        print(f'Here is our weight decay: {self.weight_decay}')
+        optimizer = AdamW(self.parameters(), lr=self.lr, weight_decay=self.weight_decay)
         warmup_steps = self.steps_per_epoch // 3
         total_steps = self.steps_per_epoch * self.n_epochs - warmup_steps
 

@@ -35,10 +35,20 @@ def generate_result_table(table):
     table_df = table_df.sort_values(['sort', 'Table Extra'])
 
     latex_strings = table_df["LaTeX String"]
+
+    horiz_sp = "\t"  # What to separate columns
+    vert_sp = "\n"  # What to place at the end of the line to seperate rows vertically
+
     if len(latex_strings) > 0:
         s = latex_strings.to_string(header=False, index=False)
         s = re.sub(r"^\s*", "", s)
-        s = re.sub(f"\n\s*", "\n", s)
+        s = re.sub(f"\n\s*", "", s)
+
+        # Replace latex horizontal cell separator with specified
+        s = re.sub(r"\s\&\s", horiz_sp, s)
+
+        # Replace latex vertical cell separator with specified
+        s = re.sub(r"\s\\\\", vert_sp, s)
 
         f.write(s + "\n")
 
@@ -64,16 +74,12 @@ if __name__ == "__main__":
     # generate_result_table("imbalance_fix")
     # generate_result_table("compare_stages_emots")
 
-    if False:
-        # Tables involving LSTM
-        generate_result_table('see_psych')
-        generate_result_table('see_counselling')
-        generate_result_table('need_emots_all_models')
-        generate_result_table('need_infos_all_models')
+    if True:  # all tables for paper
         generate_result_table('survival_all_models')
+        generate_result_table('survival_dif_lengths')
 
     # generate_result_table("compare_token_len")
-    generate_result_table("compare_token_len_survic")
+    # generate_result_table("lstm_tuning")
 
     print("Printed table LaTeX string to file!")
 

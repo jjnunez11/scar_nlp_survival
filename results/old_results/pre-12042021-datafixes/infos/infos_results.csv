@@ -1,5 +1,0 @@
-Datetime,Platform,Model,Target,Data,Mode,Pretrained Model,Embedding Dimension,Word Dimension,BoW Classifier,CNN Output Channels,LSTM Layers,LSTM Hidden Dimension,LSTM Bidirectional,CUDA Blocking,Epochs,Learning Rate,Patience,Class Imbalance Fix,Accuracy,Balanced Accuracy
-20211004-1938,SCAR_NLP,CNN,infos,PPv3,rand,GoogleNews-vectors-negative300.txt,300,300,,,,,,0,1,0.0001,5,loss_weight,0.617838688,0.598229276
-20211004-2205,SCAR_NLP,CNN,infos,PPv3,rand,GoogleNews-vectors-negative300.txt,300,300,,,,,,FALSE,100,1e-05,5,loss_weight,0.620085374,0.611280738
-20211013-0305,SCAR_NLP,LSTM,infos,PPv3,rand,GoogleNews-vectors-negative300.txt,300,300,,,2.0,128.0,0.0,FALSE,100,0.0001,5,loss_weight,0.586401626,0.583354336
-20211022-0439,SCAR_NLP,LSTM,infos,PPv3,rand,GoogleNews-vectors-negative300.txt,300,300,,,2.0,256.0,False,False,100,0.0001,5,loss_weight,0.5940817709509826,0.5697061318443299

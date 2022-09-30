@@ -61,7 +61,7 @@ class SCARBoW:
         test_counts = vectorizer.transform(self.raw_test_data['text'])
 
         # Save vectorizer object for interpretation
-        vectorizer_filename = os.path.join(self.data_dir, "vectorizer.bz2")
+        vectorizer_filename = os.path.join(self.data_dir, f"vectorizer_{self.max_tokens}.bz2")
         with bz2.BZ2File(vectorizer_filename, 'w') as f:
             pickle.dump(vectorizer, f)
 

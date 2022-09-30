@@ -13,7 +13,7 @@ def get_args():
                              'Loading a checkpoint will ignore other passed arguments and use'
                              'those from the checkpoint.')
     # Model arguments
-    parser.add_argument('--lr', type=float, default=0.00001)
+    parser.add_argument('--lr', type=float, default=0.00005)  # thesis 0.00001 but usually set higher
     parser.add_argument('--weight-decay', type=float, default=0)
     parser.add_argument('--max-tokens', type=int, default=4096,
                         help="Maximum number of tokens to processes in, though Longformer can handle 4096")
