@@ -1,13 +1,18 @@
-& n & \% \\ 
-Total & 53157 & 100\% \\ 
-Female & 27871 & 52.4 \\ 
-Stage I & 7097 & 13.4 \\ 
-Stage II & 9502 & 17.9 \\ 
-Stage III & 6477 & 12.2 \\ 
-Stage IV//Metastatic & 6317 & 11.9 \\ 
-Unknown Stage & 23764 & 44.7 \\ 
-\midrule
-& Mean & Standard Deviation \\ 
-Age at Diagnosis & 64.7 & 13.8 \\ 
-Months Survived since Diagnosis & 36.7 & 31.1 \\ 
-Months Survived since Document & 31.6 & 26.6 \\ 
+	n	%
+Total	47625	100
+Female	25428	53.4
+Stage I	6505	13.7
+Stage II	8817	18.5
+Stage III	6227	13.1
+Stage IV	6287	13.2
+Unknown Stage	19789	41.6
+	Mean	Standard Deviation
+Age at Diagnosis	64.9	13.7
+Observed Months Survived since Diagnosis	61.7	40.3
+Observed Months Survived since Document	59.9	39.9
+Months Survived since Diagnosis of those who Died	27.0	26.9
+Months Survived since Document of those who Died	25.6	26.6
+	Did not Survive (%)	Survived (%)
+6 Months	6178 (13.0)	41447 (87.0)
+36 Months	 16482 (34.6)	31143 (65.4)
+60 Months	 19742 (41.5)	27880 (58.5)

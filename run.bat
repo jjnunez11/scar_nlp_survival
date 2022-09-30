@@ -61,4 +61,7 @@
 :: python -m models.lstm --target "dsplnic_SOCIALWORK_60" --table "see_counselling"
 :: python -m models.lstm --target "survic_mo_60" --table "survival_all_models"
 
-python -m models.cnn --target "dsplnic_PSYCHIATRY_60"
+:: python -m models.cnn --target "dsplnic_PSYCHIATRY_60"
+
+python -m models.bow --target "surv_mo_60" --epochs 1
+:: python -m models.cnn --target "surv_mo_60" --epochs 1

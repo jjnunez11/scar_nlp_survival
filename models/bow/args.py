@@ -20,7 +20,7 @@ def get_args():
     parser.add_argument('--gbdt-estimators', default=100, type=int)
     parser.add_argument('--gbdt-lr', default=0.1, type=float)
     parser.add_argument('--gbdt-max-depth', default=3, type=int)
-    parser.add_argument('--l2logreg-c', default=0.2, type=float)
+    parser.add_argument('--l2logreg-c', default=1, type=float)  # thesis default 0.2
 
     # Extra arguments for saving models etc, can implement later
     # TODO_ parser.add_argument('--save-path', type=str, default=os.path.join('model_checkpoints', 'reg_lstm'))

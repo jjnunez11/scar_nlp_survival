@@ -87,7 +87,8 @@ class BoWTrainer(object):
             clf.fit(train_x, train_y)
 
             # Predict using train set
-            predicted_labels = np.array(clf.predict(train_x))
+            predicted_labels = np.array(clf.predict_proba(train_x))
+            predicted_labels = np.array([x[1] for x in predicted_labels])  # Get the probability for survival
             target_labels = np.array(train_y)
 
             train_loss = 0  # np.mean(train_loss)
@@ -96,7 +97,8 @@ class BoWTrainer(object):
             train_history = add_epoch_perf(target_labels, predicted_labels, train_loss, train_history)
 
             # Evaluate on dev set ----------------------------------------
-            predicted_labels = np.array(clf.predict(dev_x))
+            predicted_labels = np.array(clf.predict_proba(dev_x))
+            predicted_labels = np.array([x[1] for x in predicted_labels])  # Get the probability for survival
             target_labels = np.array(dev_y)
             dev_loss = 0  # np.mean(dev_loss)
             dev_history = add_epoch_perf(target_labels, predicted_labels, dev_loss, dev_history)

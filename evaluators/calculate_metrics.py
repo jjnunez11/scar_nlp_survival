@@ -30,7 +30,6 @@ def calculate_metrics(pred_labels, target_labels, loss=torch.tensor([0])):
     tp = cm[1, 1].item()
     fn = cm[1, 0].item()
     fp = cm[0, 1].item()
-    # print(f'tn {tn}, tp: {tp}, fn: {fn}, fp: {fp}')
     try:
         ppv = tp / (tp + fp)
     except ZeroDivisionError:
