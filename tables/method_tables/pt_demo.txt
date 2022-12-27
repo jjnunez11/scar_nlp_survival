@@ -12,6 +12,7 @@ Observed Months Survived since Diagnosis	61.7	40.3
 Observed Months Survived since Document	59.9	39.9
 Months Survived since Diagnosis of those who Died	27.0	26.9
 Months Survived since Document of those who Died	25.6	26.6
+Months Between Diagnosis and Document	1.3	1.3
 	Did not Survive (%)	Survived (%)
 6 Months	6178 (13.0)	41447 (87.0)
 36 Months	 16482 (34.6)	31143 (65.4)

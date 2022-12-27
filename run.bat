@@ -63,5 +63,5 @@
 
 :: python -m models.cnn --target "dsplnic_PSYCHIATRY_60"
 
-python -m models.bow --target "surv_mo_60" --epochs 1
+:: python -m models.bow --target "surv_mo_60" --epochs 1
 :: python -m models.cnn --target "surv_mo_60" --epochs 1

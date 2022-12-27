@@ -71,6 +71,7 @@ def generate_pt_demo_table():
     f.write(f'Observed Months Survived since Document{horiz_sp}' + get_mean_std(df, "mo_survived_since_initial_consult"))
     f.write(f'Months Survived since Diagnosis of those who Died{horiz_sp}' + get_mean_std(df_died, "mo_survived"))
     f.write(f'Months Survived since Document of those who Died{horiz_sp}' + get_mean_std(df_died, "mo_survived_since_initial_consult"))
+    f.write(f'Months Between Diagnosis and Document{horiz_sp}' + get_mean_std(df, "mo_from_dx_to_initial_consult"))
     # f.write(vert_sp)
     f.write(f"{horiz_sp}Did not Survive (%){horiz_sp}Survived (%){vert_sp}")
     f.write(f"6 Months{horiz_sp}" + get_label_balance("surv_mo_6", False))
