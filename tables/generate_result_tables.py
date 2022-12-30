@@ -76,7 +76,7 @@ if __name__ == "__main__":
 
     if True:  # all tables for paper
         generate_result_table('survival_all_models')
-        generate_result_table('survival_dif_lengths')
+        # generate_result_table('survival_dif_lengths')
 
     # generate_result_table("compare_token_len")
     # generate_result_table("lstm_tuning")

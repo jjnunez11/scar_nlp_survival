@@ -90,24 +90,22 @@ class MyLogger(LightningLoggerBase):
         print(metrics)
 
         if 'dev_perf' in metrics:
-            # print("\n Metrics provided for a dev epoch\n")
-            # print(f'Metrics: {metrics["dev_perf"]}')
-            # print(f'Step: {step}')
             dev_perf = metrics["dev_perf"]
             dev_perf["epoch"] = metrics["epoch"]
             self.dev_history = self.dev_history.append(dev_perf, ignore_index=True)
             self.dev_history.index.name = "epoch"
-            # print(f'Here is the dev history: {self.dev_history.shape}')
 
-        if 'train_perf_epoch' in metrics:
-            # print("\nTraining epoch\n")
-            # print(f'Metrics: {metrics["train_perf_epoch"]}')
-            # print(f'Step: {step}')
-
+        elif 'train_perf_epoch' in metrics:
             train_perf = metrics["train_perf_epoch"]
             train_perf["epoch"] = metrics["epoch"]
             self.train_history = self.train_history.append(train_perf, ignore_index=True)
             self.train_history.index.name = "epoch"
+
+        elif 'test_perf' in metrics:
+            test_perf = metrics["test_perf"]
+            test_perf["epoch"] = metrics["epoch"]
+            self.test_history = self.test_history.append(test_perf, ignore_index=True)
+            self.test_history.index.name = "epoch"
 
         pass
 

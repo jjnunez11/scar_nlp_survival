@@ -72,20 +72,12 @@ def transformer_main(model_name, model_class, model_dataset, args):
     if not os.path.exists(config.results_dir_model):
         os.mkdir(config.results_dir_model)
 
-    # Save Checkpoint
-    # saves a file like: input/BERT-epoch=02-val_loss=0.32.ckpt
-    checkpoint_callback = ModelCheckpoint(
-        monitor='val_bal',  # monitored quantity
-        filename=model_name + '-{epoch:02d}-{val_loss:.2f}',
-        save_top_k=1,  # save the top 3 models
-        mode='max',  # mode of the monitored quantity  for optimization
-        dirpath=config.results_dir_model
-    )
-
     # Try out some different loggers
     tb_logger = pl.loggers.TensorBoardLogger(save_dir=config.results_dir_model)
     my_logger = MyLogger(save_dir=config.results_dir_model)
 
+    # Save Checkpoint
+    # saves a file like: input/BERT-epoch=02-val_loss=0.32.ckpt
     checkpoint_callback = ModelCheckpoint(
         monitor='val_bal',  # monitored quantity
         filename=f'{tb_logger.log_dir}/' + model_name + '--{epoch}_val_bal_{val_bal:.2f}',
@@ -98,10 +90,17 @@ def transformer_main(model_name, model_class, model_dataset, args):
                                  checkpoint_callback=checkpoint_callback,
                                  logger=[tb_logger, my_logger]
                                  )
-
-    trainer.fit(model, dataset)
+    # Load and evaluate vs train and evaluate
+    if eval_only:
+        loaded_model = model_class.load_from_checkpoint(
+            checkpoint_path=config.model_file,
+            hparams_file=r"C:\Users\jjnunez\PycharmProjects\scar_nlp_survival\results\paper_submission\surv_mo_60\BERT\hparams.yaml",
+            map_location=None)
+        trainer.test(loaded_model, dataloaders=dataset)
+    else:
+        trainer.fit(model, dataset)
     train_history, dev_history, test_history, start_time = trainer.get_results()
-
+    print(test_history)
     evaluator = Evaluator(model_name, test_history, config, start_time)
 
     # Use evaluator to print the best epochs

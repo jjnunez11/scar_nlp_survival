@@ -20,6 +20,9 @@ def get_args():
                                  'bert_pretrain_output_disch_100000',
                                  'biobert_pretrain_output_all_notes_150000',
                                  'biobert_pretrain_output_disch_100000'])
+    parser.add_argument('--hparams-file',
+                        default=None,
+                        help="Absolute path to a PyTorch lightning hparams.yaml file to load hparams from")
 
     # Program Arguments
     parser.add_argument('--count_tokens', default=False,

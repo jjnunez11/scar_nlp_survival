@@ -33,6 +33,9 @@ class BERT(pl.LightningModule):
         self.val_bal = Accuracy(average='macro',
                                 num_classes=2,
                                 multiclass=True)
+        self.test_bal = Accuracy(average='macro',
+                                 num_classes=2,
+                                 multiclass=True)
 
     def forward(self, input_ids, attn_mask, labels=None):
         output = self.bert(input_ids=input_ids, attention_mask=attn_mask)
@@ -112,11 +115,12 @@ class BERT(pl.LightningModule):
     def test_step(self, batch, batch_idx):
         input_ids = batch['input_ids']
         attention_mask = batch['attention_mask']
-        labels = batch['label']
+        target_labels = batch['label']
 
-        outputs = self(input_ids, attention_mask)
-        loss = self.loss_fn(outputs, labels)
-        self.log('test_loss', loss, prog_bar=True, logger=True)
+        loss, pred_labels = self(input_ids, attention_mask, target_labels)
+        self.log("test_loss", loss, prog_bar=False, logger=True, on_epoch=True)
+
+        return {"loss": loss, "predictions": pred_labels.detach(), "labels": target_labels}
 
         return loss
 
@@ -181,4 +185,3 @@ class BERT(pl.LightningModule):
             print(f'Could not cat, here is the first prediction output: {output[0]["labels"]}')
 
         return epoch_pred_labels, epoch_target_labels
-
