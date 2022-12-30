@@ -7,7 +7,7 @@ def get_args():
 
     parser.add_argument('--no-cuda', action='store_false', dest='cuda')
     parser.add_argument('--gpu', type=int, default=0)
-    parser.add_argument('--cuda-block', default=False, type=bool)
+    parser.add_argument('--cuda_block', default=False, dest='cuda_block', action='store_true')
     parser.add_argument('--epochs', type=int, default=100)
     parser.add_argument('--seed', type=int, default=3435)
     parser.add_argument('--patience', type=int, default=5)
@@ -28,5 +28,12 @@ def get_args():
     parser.add_argument('--dataset', type=str, default='SCAR', choices=['SCAR'])
     parser.add_argument('--debug', action='store_true', dest='debug',
                         help="If included, loads a smaller training set to save time while debugging")
+    parser.add_argument('--eval_only', default=False, dest='eval_only', action='store_true',
+                        help="If provided, will not train a model, but will instead load a model and evaluate that")
+    parser.add_argument('--model-file',
+                        default=r"C:\Users\jjnunez\PycharmProjects\scar_nlp_survival\results\paper_submission\surv_mo_60\CNN\CNN_20220928-2210.pt",
+                        # default=r"C:\Users\jjnunez\PycharmProjects\scar_nlp_survival\results\paper_submission\surv_mo_60\BoW\BoW_20220928-2054_e0.pbz2",
+                        #default=None,
+                        help="Absolute path and filename to a pytorch model to load and evaluate")
 
     return parser

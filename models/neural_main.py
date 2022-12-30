@@ -17,8 +17,12 @@ def neural_main(model_name, model_class, model_trainer, args):
     :param args: arguments passed in by the get_args function of the args file of that modal
     :return: nothing, but loads, trains, and evaluates the models
     """
+    eval_only = args.eval_only
+    if eval_only:
+        print(f"Loading and evaluating a {model_name} model")
+    else:
+        print(f"Training and evaluating a {model_name} model")
 
-    print(f"Training and evaluating a {model_name} model")
     start_time = datetime.datetime.now().strftime("%Y%m%d-%H%M")
 
     # Set CUDA Blocking if needed, used when getting CUDA errors:
@@ -39,7 +43,7 @@ def neural_main(model_name, model_class, model_trainer, args):
     if args.imbalance_fix == 'loss_weight':
         scar = SCAR(args.batch_size, args.data_dir, args.target)
         target_perc = scar.get_class_balance()  # Percentage of targets = 1
-        pos_weight = (1 - target_perc)/target_perc
+        pos_weight = (1 - target_perc) / target_perc
         print(f"Weighting our Loss Function to Balance Target Classes\n"
               f"Training examples with target=1 will get a factor of: {round(pos_weight, 3)}")
         loss_fn = nn.BCEWithLogitsLoss(pos_weight=torch.tensor(pos_weight))
@@ -79,8 +83,13 @@ def neural_main(model_name, model_class, model_trainer, args):
     trainer = model_trainer(model, optimizer, loss_fn, config)
 
     # Train and Evaluate Model
-    train_history, dev_history, start_time = trainer.fit(train_dataloader, dev_dataloader)
-    evaluator = Evaluator(model_name, dev_history, config, start_time)
+    if eval_only:
+        test_history, start = trainer.eval_only(test_dataloader)
+    else:
+        train_history, dev_history, test_history, start_time = trainer.fit(train_dataloader,
+                                                                           dev_dataloader,
+                                                                           test_dataloader)
+    evaluator = Evaluator(model_name, test_history, config, start_time)
 
     # Use evaluator to print the best epochs
     print('\nBest epoch for AUC:')

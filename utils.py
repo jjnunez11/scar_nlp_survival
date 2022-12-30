@@ -63,7 +63,11 @@ def print_from_history(history, index, start_time, epoch, n_epochs):
 
     index = history.index[index]  # Re-cast this so that -1 index can be used with .loc below
 
-    minutes_elapsed = int(round((time.time() - start_time) / 60, 0))
+    try:
+        minutes_elapsed = int(round((time.time() - start_time) / 60, 0))
+    except TypeError:
+        minutes_elapsed = 0  # if it takes less than a minute will throw error above
+
     epoch_header = ['Minutes', 'Epoch', 'Dev/Acc', 'Dev/BalAcc', 'Dev/AUC', 'Dev/Pr', 'Dev/Rec', 'Dev/F1',
                     'Dev/Loss']
     epoch_metrics = [[minutes_elapsed, f'{epoch}/{n_epochs}',

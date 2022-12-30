@@ -6,6 +6,7 @@ from utils import print_from_history
 from evaluators.calculate_metrics import add_epoch_perf
 import os
 from copy import deepcopy
+from models.cnn.model import CNN
 
 
 class NeuralTrainer(object):
@@ -29,10 +30,12 @@ class NeuralTrainer(object):
         self.start = None
         self.n_epochs = config.epochs
         self.snapshot_path = os.path.join(config.results_dir_model, config.run_name + ".pt")
+        self.model_file = config.model_file
 
     def fit(self,
             train_loader,
-            dev_loader):
+            dev_loader,
+            test_loader):
 
         train_history = self.create_history_pd()
         dev_history = self.create_history_pd()
@@ -43,22 +46,10 @@ class NeuralTrainer(object):
         pd.set_option('display.width', 100)
 
         # Convert generators to lists so they don't get consumed after one epoch
-        train_loader_full = list(train_loader)
+        train_loader = list(train_loader)
         dev_loader = list(dev_loader)
+        test_loader = list(test_loader)
         self.start = time.time()
-
-        # First step towards CV, split train loader and evaluate onto test split
-        # train_loader = train_loader[0:20000]
-        # test_split_loader = train_loader[-10000:]
-        # print(f'This is the total length: {len(train_loader_full)}')
-        # train_loader = train_loader_full[-1200:]
-        # train_loader = train_loader_full[0:1200]
-        # print(f'This is the total length train_loader: {len(train_loader)}')
-        # test_split_loader = train_loader_full[0:600]
-        # test_split_loader = train_loader_full[-600:]
-        # print(f'This is the total test_split_loader: {len(test_split_loader)}')
-        train_loader = train_loader_full[-1500:]
-        test_split_loader = train_loader_full[0:500]
 
         for epoch in range(self.n_epochs):
 
@@ -142,7 +133,6 @@ class NeuralTrainer(object):
                 if epoch_monitor_metric > self.best_moniter_metric:
                     self.iters_not_improved = 0
                     self.best_moniter_metric = epoch_monitor_metric
-                    # torch.save(self.model, self.snapshot_path)
                     model_to_save = deepcopy(self.model)
                     torch.save({
                         'model_state_dict': model_to_save.state_dict(),
@@ -156,20 +146,18 @@ class NeuralTrainer(object):
                         print("Early Stopping. Epoch: {}, Best Dev F1: {}".format(epoch, self.best_moniter_metric))
                         break
 
-        self.evaluate_on_test_split(model_to_save, test_split_loader, test_history)
-        return train_history, dev_history, self.start
+        test_history = self.evaluate_on_test_split(model_to_save, test_loader, test_history)
+        return train_history, dev_history, test_history, self.start
 
-    def evaluate_on_test_split(self, model, test_split_loader, history):
+    def evaluate_on_test_split(self, model, test_loader, history):
         model.eval()
-
-        print(f'Evaluating on test split, n is: {len(test_split_loader)}')
 
         with torch.no_grad():
             test_losses = torch.empty(0, device=self.device)
             test_predicted_labels = torch.empty(0, device=self.device)
             test_target_labels = torch.empty(0, device=self.device).int()
 
-            for inputs, targets in test_split_loader:
+            for inputs, targets in test_loader:
                 targets = targets.view(-1, 1).float()
                 inputs = torch.transpose(inputs, 0, 1)
                 # Move data to GPU
@@ -193,8 +181,34 @@ class NeuralTrainer(object):
             history = add_epoch_perf(test_target_labels, test_predicted_labels, mean_test_losses, history)
 
             # Print Epoch Results so far
-            print("Here are the results on our pseudo CV test split:")
+            print("Here are the results on our test split:")
             print_from_history(history, -1, self.start, 0, self.n_epochs)
+
+            # Return test split history
+            return history
+
+    def eval_only(self,
+                  test_loader):
+
+        test_history = self.create_history_pd()
+
+        # Set Pandas setting to allow more columns to print out epoch results
+        pd.set_option('display.max_columns', None)
+        pd.set_option('display.width', 100)
+
+        # Convert generators to lists so they don't get consumed after one epoch
+        test_loader = list(test_loader)
+        self.start = time.time()
+
+        # Load model
+        checkpoint = torch.load(self.model_file)
+        loading_model = CNN(config=checkpoint['config'])
+        loading_model.load_state_dict(checkpoint['model_state_dict'])
+        loading_model.eval()
+        loaded_model = loading_model.to(self.device)
+
+        test_history = self.evaluate_on_test_split(loaded_model, test_loader, test_history)
+        return test_history, self.start
 
     @staticmethod
     def create_history_pd():

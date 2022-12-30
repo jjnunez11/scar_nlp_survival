@@ -140,7 +140,7 @@ class Evaluator(object):
                                        str(round(best_bal_acc_epoch['bal_acc'], decimals)),
                                        str(round(best_bal_acc_epoch['auc'], decimals)),
                                        str(round(best_bal_acc_epoch['f1'], decimals)),
-                                       str(round(best_bal_acc_epoch['sens'], decimals)),
+                                       str(round(best_bal_acc_epoch['prec'], decimals)),
                                        str(round(best_bal_acc_epoch['spec'], decimals))])
 
         latex_string = latex_string + r" \\"

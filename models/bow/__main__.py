@@ -8,7 +8,6 @@ import warnings
 import datetime
 
 if __name__ == '__main__':
-    print("Training and evaluating a BoW model")
 
     args = get_args()
 
@@ -17,6 +16,12 @@ if __name__ == '__main__':
     model_name = "BoW"
     start_time = datetime.datetime.now().strftime("%Y%m%d-%H%M")
     config.run_name = model_name + "_" + start_time
+
+    eval_only = args.eval_only
+    if eval_only:
+        print(f"Loading and evaluating a {model_name} model")
+    else:
+        print(f"Training and evaluating a {model_name} model")
 
     # Loss
     if config.imbalance_fix == 'loss_weight':
@@ -42,7 +47,7 @@ if __name__ == '__main__':
     # Load the data
     train_data = scar_bow.get_train_data()
     dev_data = scar_bow.get_dev_data()
-    test_data = scar_bow.get_dev_data()
+    test_data = scar_bow.get_test_data()
 
     # Make directories for results if not already there
     config.results_dir_target = os.path.join(config.results_dir, config.target)  # dir for a targets results
@@ -55,8 +60,11 @@ if __name__ == '__main__':
 
     # Train and Evaluate Model
     trainer = BoWTrainer(config=config, class_weight=class_weight)
-    train_history, dev_history, start_time = trainer.fit(train_data, dev_data, config.epochs)
-    evaluator = Evaluator("BoW", dev_history, config, start_time)
+    if eval_only:
+        test_history = trainer.eval_only(test_data)
+    else:
+        train_history, dev_history, test_history, start_time = trainer.fit(train_data, dev_data, test_data, config.epochs)
+    evaluator = Evaluator("BoW", test_history, config, start_time)
 
     # Use evaluator to print the best epochs
     print('\nBest epoch for AUC:')

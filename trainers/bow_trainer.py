@@ -32,6 +32,8 @@ class BoWTrainer(object):
         self.best_dev_f1 = 0
         self.start = None
 
+        self.model_file = config.model_file
+
         # Need these to save model
         self.results_dir_model = config.results_dir_model
         self.run_name = config.run_name
@@ -39,10 +41,12 @@ class BoWTrainer(object):
     def fit(self,
             train_data,
             dev_data,
+            test_data,
             n_epochs: int = 100):
 
         train_history = pd.DataFrame()
         dev_history = pd.DataFrame()
+        test_history = pd.DataFrame()
 
         # Set Pandas setting to allow more columns to print out epoch results
         pd.set_option('display.max_columns', None)
@@ -53,6 +57,8 @@ class BoWTrainer(object):
         train_y = deepcopy(train_data['label']).to_numpy()
         dev_x = series_to_matrix(deepcopy(dev_data['vector']))
         dev_y = deepcopy(dev_data['label']).to_numpy()
+        test_x = series_to_matrix(deepcopy(test_data['vector']))
+        test_y = deepcopy(test_data['label']).to_numpy()
 
         self.start = time.time()
 
@@ -103,6 +109,13 @@ class BoWTrainer(object):
             dev_loss = 0  # np.mean(dev_loss)
             dev_history = add_epoch_perf(target_labels, predicted_labels, dev_loss, dev_history)
 
+            # Evaluate on test set ----------------------------------------
+            predicted_labels = np.array(clf.predict_proba(test_x))
+            predicted_labels = np.array([x[1] for x in predicted_labels])  # Get the probability for survival
+            target_labels = np.array(test_y)
+            test_loss = 0
+            test_history = add_epoch_perf(target_labels, predicted_labels, test_loss, test_history)
+
             # Print Epoch Results so far
             print_from_history(dev_history, -1, self.start, epoch, n_epochs)
 
@@ -111,5 +124,32 @@ class BoWTrainer(object):
             with bz2.BZ2File(models_filename, 'w') as f2:
                 cPickle.dump(clf, f2)
 
-        return train_history, dev_history, self.start
+        return train_history, dev_history, test_history, self.start
 
+    def eval_only(self, test_data):
+
+        # Set Pandas setting to allow more columns to print out epoch results
+        pd.set_option('display.max_columns', None)
+        pd.set_option('display.width', 100)
+
+        test_x = series_to_matrix(deepcopy(test_data['vector']))
+        test_y = deepcopy(test_data['label']).to_numpy()
+        test_history = pd.DataFrame()
+
+        # Load classifier from pickle
+        with bz2.BZ2File(self.model_file, 'rb') as f:
+            clf = cPickle.load(f)
+
+        # Evaluate on test set ----------------------------------------
+        predicted_labels = np.array(clf.predict_proba(test_x))
+        predicted_labels = np.array([x[1] for x in predicted_labels])  # Get the probability for survival
+        target_labels = np.array(test_y)
+        test_loss = 0
+        test_history = add_epoch_perf(target_labels, predicted_labels, test_loss, test_history)
+
+        # Print Epoch Results so far
+        print_from_history(test_history, -1, self.start, 1, 1)
+
+        self.start = time.time()
+
+        return test_history

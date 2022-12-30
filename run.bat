@@ -65,3 +65,14 @@
 
 :: python -m models.bow --target "surv_mo_60" --epochs 1
 :: python -m models.cnn --target "surv_mo_60" --epochs 1
+
+:: python -m models.cnn --target "surv_mo_60_I" --table "initial_stage_I"
+:: python -m models.cnn --target "surv_mo_60_II" --table "initial_stage_II"
+:: python -m models.cnn --target "surv_mo_60_III" --table "initial_stage_III"
+:: python -m models.cnn --target "surv_mo_60_IV" --table "initial_stage_IV"
+
+:: python -m models.bow --target "surv_mo_60_IV" --table "initial_stage_IV" --epochs 1
+
+python -m models.cnn --target "surv_mo_60" --eval_only --batch 2 --table_extra retr
+
+:: python -m models.bow --target "surv_mo_60" --epochs 1 --table "frwt" --eval_only

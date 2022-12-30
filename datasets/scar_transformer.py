@@ -42,9 +42,6 @@ class SCARTransformerDataset(Dataset):
 
 
 class SCARTransformer(pl.LightningDataModule):
-    NUM_LINES = {'train': 30953,
-                 'dev': 4459,
-                 'test': 4458}
     DATASET_NAME = "SCAR"
     NUM_CLASSES = 1
 
@@ -53,14 +50,30 @@ class SCARTransformer(pl.LightningDataModule):
         self.batch_size = config.batch_size
         self.max_len = config.max_tokens
         self.device = config.device
-        if undersample:
-            self.data_dir = os.path.join(config.data_dir, config.target + "_undersampled")
-            self.NUM_LINES['train'] = 1815
-        else:
-            self.data_dir = os.path.join(config.data_dir, config.target)
+
         self.f_train = os.path.join(self.data_dir, 'train.tsv')
         self.f_dev = os.path.join(self.data_dir, 'dev.tsv')
         self.f_test = os.path.join(self.data_dir, 'test.tsv')
+
+        with open(self.f_train) as f:
+            self.n_train = len(f.readlines())
+        f.close()
+        with open(self.f_dev) as f:
+            self.n_dev = len(f.readlines())
+        f.close()
+        with open(self.f_test) as f:
+            self.n_test = len(f.readlines())
+        f.close()
+        self.n_lines = {'train': self.n_train,
+                        'dev': self.n_dev,
+                        'test': self.n_test}
+
+        if undersample:
+            self.data_dir = os.path.join(config.data_dir, config.target + "_undersampled")
+            self.n_lines['train'] = 1815
+        else:
+            self.data_dir = os.path.join(config.data_dir, config.target)
+
         self.debug = config.debug
 
         pretrained_model_path = os.path.join(config.pretrained_dir, config.pretrained_file)

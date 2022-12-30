@@ -10,21 +10,20 @@ from torch.utils.data import DataLoader
 from torch.nn.utils.rnn import pad_sequence
 import torch
 import random
+import warnings
 
 
 class SCAR:
-    NUM_LINES = {'train': 30953,
-                 'dev': 4459,
-                 'test': 4458}
     DATASET_NAME = "SCAR"
     NUM_CLASSES = 1
 
     def __init__(self, batch_size, data_root, target, undersample=False, device=torch.device('cuda:0'), min_freq=10):
         self.batch_size = batch_size
         self.device = device
+
         if undersample:
             self.data_dir = os.path.join(data_root, target + "_undersampled")
-            self.NUM_LINES['train'] = 1815
+            self.n_lines['train'] = 1815
         else:
             self.data_dir = os.path.join(data_root, target)
 
@@ -34,6 +33,27 @@ class SCAR:
         self.f_dict = {'train': self.f_train,
                        'dev': self.f_dev,
                        'test': self.f_test}
+
+        with open(self.f_train) as f:
+            self.n_train = len(f.readlines())
+        f.close()
+        with open(self.f_dev) as f:
+            self.n_dev = len(f.readlines())
+        f.close()
+        with open(self.f_test) as f:
+            self.n_test = len(f.readlines())
+        f.close()
+        # from old setting
+        warnings.warn("Warning, manually setting n_train")
+        self.n_train = 30953
+
+
+        self.n_lines = {'train': self.n_train,
+                        'dev': self.n_dev,
+                        'test': self.n_test}
+
+        if undersample:
+            self.n_lines['train'] = 1815
 
         # Make iters of the input text files
         self.train_iter, self.dev_iter, self.test_iter = self.create_iter(split=('train', 'dev', 'test'))
@@ -93,13 +113,13 @@ class SCAR:
             for line in f:
                 values = line.split("\t")
                 assert len(values) == 2, \
-                    'Error: excepted SCAR datafile to be tsv format, but splitting did not yield 2 parts'
+                    'Error: excepted SCAR datafile to be tsv format, but splitting by tab did not yield 2 parts'
                 label = values[0]  # root.target_parse(values[0])
                 text = values[1]
                 yield label, text
 
         iterator = generate_scar_data(split, root.f_dict)
-        return _RawTextIterableDataset(root.DATASET_NAME, root.NUM_LINES[split], iterator)
+        return _RawTextIterableDataset(root.DATASET_NAME, root.n_lines[split], iterator)
 
     def collate_batch(self, batch):
         label_list, text_list = [], []
