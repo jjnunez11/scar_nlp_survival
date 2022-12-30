@@ -3,8 +3,6 @@ from torchtext.data.datasets_utils import _RawTextIterableDataset
 from torchtext.vocab import build_vocab_from_iterator
 import io
 import os.path
-# from collections import Counter
-# from torchtext.vocab import Vocab
 from torchtext.data.utils import get_tokenizer
 from torch.utils.data import DataLoader
 from torch.nn.utils.rnn import pad_sequence
@@ -34,6 +32,7 @@ class SCAR:
                        'dev': self.f_dev,
                        'test': self.f_test}
 
+        # Count number of lines in all of the data splits
         with open(self.f_train) as f:
             self.n_train = len(f.readlines())
         f.close()
@@ -44,10 +43,11 @@ class SCAR:
             self.n_test = len(f.readlines())
         f.close()
         # from old setting
-        warnings.warn("Warning, manually setting n_train")
+        warnings.warn("Warning, manually setting n_train to maintain comatability with previously trained model. "
+                      "Comment follow line if using new models")
         self.n_train = 30953
 
-
+        # Create a dict with the lengths
         self.n_lines = {'train': self.n_train,
                         'dev': self.n_dev,
                         'test': self.n_test}
@@ -203,8 +203,6 @@ class SCAR:
         return [self.vocab['<BOS>']] + [self.vocab[token] for token in self.tokenizer(text)] + [self.vocab['<EOS>']]
 
     def get_class_balance(self):
-        # print(f"Expecting 17692/30953 {17692/30953} for scar_emots")
-
         targets_equal_one = 0
         targets_total = 0
 
@@ -213,30 +211,4 @@ class SCAR:
             targets_total += len(targets.cpu().detach().numpy())
             targets_equal_one += targets.cpu().detach().numpy().sum()
 
-        return targets_equal_one/targets_total
-
-if __name__ == '__main__':
-    scar = SCAR(2)
-
-    # Check that iter and lists created
-    print(f'train iter length {len(scar.train_iter)}')
-
-    # Check vocab creation
-    print("The length of the new vocab is", len(scar.vocab))
-
-    check_token = scar.vocab.get_itos()
-    print("The token at index 2 is", check_token[2])
-
-    # Check that text transformer is working
-    print("input to the text_transform:", "here is an example")
-    print("output of the text_transform:", scar.text_transform("here is an example"))
-
-    # Check that collate_batch is working
-    train_dataloader = DataLoader(scar.create_iter(split='train'), batch_size=8,
-                                  collate_fn=scar.collate_batch)
-    # print(next(iter(train_dataloader)))
-
-    # Finally, check that bucket_dataloader is working
-    d = scar.dev_dataloader()
-    print(len(scar.create_iter(split='dev')))
-    print(next(iter(d)))
+        return targets_equal_one / targets_total

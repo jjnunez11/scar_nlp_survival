@@ -17,7 +17,8 @@ def get_args():
                         help='How to deal with the class imbalance in our dataset')
     parser.add_argument('--data-dir',
                         default=os.path.join(r'C:\Users\jjnunez\PycharmProjects', 'scar_nlp_data', 'data'))
-    parser.add_argument('--results-dir', default=os.path.join(r'C:\Users\jjnunez\PycharmProjects\scar_nlp_survival', 'results'))
+    parser.add_argument('--results-dir',
+                        default=os.path.join(r'C:\Users\jjnunez\PycharmProjects\scar_nlp_survival', 'results'))
     parser.add_argument('--data-version', type=str, default='ppv4',
                         help='Version of preprocessing used for this dataset')
     parser.add_argument('--target', type=str, help='The specific target for the prediction')
@@ -31,9 +32,8 @@ def get_args():
     parser.add_argument('--eval_only', default=False, dest='eval_only', action='store_true',
                         help="If provided, will not train a model, but will instead load a model and evaluate that")
     parser.add_argument('--model-file',
-                        default=r"C:\Users\jjnunez\PycharmProjects\scar_nlp_survival\results\paper_submission\surv_mo_60\CNN\CNN_20220928-2210.pt",
-                        # default=r"C:\Users\jjnunez\PycharmProjects\scar_nlp_survival\results\paper_submission\surv_mo_60\BoW\BoW_20220928-2054_e0.pbz2",
-                        #default=None,
-                        help="Absolute path and filename to a pytorch model to load and evaluate")
+                        default=None,
+                        help="Absolute path to a PyTorch model checkpoint (neural models) or pickle dump (BoW)"
+                             " to load and evaluate")
 
     return parser

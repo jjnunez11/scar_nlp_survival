@@ -51,6 +51,12 @@ class SCARTransformer(pl.LightningDataModule):
         self.max_len = config.max_tokens
         self.device = config.device
 
+        if undersample:
+            self.data_dir = os.path.join(config.data_dir, config.target + "_undersampled")
+            self.n_lines['train'] = 1815
+        else:
+            self.data_dir = os.path.join(config.data_dir, config.target)
+
         self.f_train = os.path.join(self.data_dir, 'train.tsv')
         self.f_dev = os.path.join(self.data_dir, 'dev.tsv')
         self.f_test = os.path.join(self.data_dir, 'test.tsv')
@@ -68,11 +74,6 @@ class SCARTransformer(pl.LightningDataModule):
                         'dev': self.n_dev,
                         'test': self.n_test}
 
-        if undersample:
-            self.data_dir = os.path.join(config.data_dir, config.target + "_undersampled")
-            self.n_lines['train'] = 1815
-        else:
-            self.data_dir = os.path.join(config.data_dir, config.target)
 
         self.debug = config.debug
 
@@ -86,17 +87,17 @@ class SCARTransformer(pl.LightningDataModule):
 
         # Tokenize up to max length, and put into a PyTorch Dataset
         self.train_dataset = SCARTransformerDataset(consults=self.raw_x_train,
-                                             labels=self.raw_y_train,
-                                             tokenizer=self.tokenizer,
-                                             max_len=self.max_len)
+                                                    labels=self.raw_y_train,
+                                                    tokenizer=self.tokenizer,
+                                                    max_len=self.max_len)
         self.dev_dataset = SCARTransformerDataset(consults=self.raw_x_dev,
-                                           labels=self.raw_y_dev,
-                                           tokenizer=self.tokenizer,
-                                           max_len=self.max_len)
+                                                  labels=self.raw_y_dev,
+                                                  tokenizer=self.tokenizer,
+                                                  max_len=self.max_len)
         self.test_dataset = SCARTransformerDataset(consults=self.raw_x_test,
-                                            labels=self.raw_y_test,
-                                            tokenizer=self.tokenizer,
-                                            max_len=self.max_len)
+                                                   labels=self.raw_y_test,
+                                                   tokenizer=self.tokenizer,
+                                                   max_len=self.max_len)
 
     def clean_data(self, f):
         """
@@ -176,12 +177,10 @@ class SCARTransformer(pl.LightningDataModule):
         return DataLoader(self.test_dataset, batch_size=self.batch_size, num_workers=8)
 
     def get_class_balance(self):
-        #  print(f"Expecting 17692/30953 {17692/30953} for scar_emots")
         targets_equal_one = sum(x[0] for x in self.raw_y_train)
         targets_total = len(self.raw_y_train)
-        #  print(f"Found {targets_equal_one}/{targets_total} or {round(targets_equal_one/targets_total, 3)}")
 
-        return targets_equal_one/targets_total
+        return targets_equal_one / targets_total
 
     def get_n_training(self):
         return len(self.raw_y_train)

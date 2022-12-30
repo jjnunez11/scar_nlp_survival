@@ -5,14 +5,8 @@ from pytorch_lightning.callbacks.early_stopping import EarlyStopping
 from pytorch_lightning.utilities import rank_zero_only
 from pytorch_lightning.loggers import LightningLoggerBase
 from pytorch_lightning.loggers.base import rank_zero_experiment
-import numpy as np
-from tqdm import tqdm
-import torch
-from sklearn import metrics
 import time
 import pandas as pd
-import torch.nn.functional as F
-from utils import print_from_history
 import pytorch_lightning as pl
 
 
@@ -41,10 +35,10 @@ class TransformerTrainer(pl.Trainer):
         :return:
         """
 
-        train_history, dev_history = self.logger[1].get_history()
+        train_history, dev_history, test_history = self.logger[1].get_history()
         start = self.start
 
-        return train_history, dev_history, start
+        return train_history, dev_history, test_history, start
 
 
 class MyLogger(LightningLoggerBase):
@@ -65,6 +59,7 @@ class MyLogger(LightningLoggerBase):
 
         self.train_history = pd.DataFrame()
         self.dev_history = pd.DataFrame()
+        self.test_history = pd.DataFrame()
 
     @property
     def name(self):
@@ -91,6 +86,8 @@ class MyLogger(LightningLoggerBase):
     def log_metrics(self, metrics, step):
         # metrics is a dictionary of metric names and values
         # your code to record metrics goes here
+
+        print(metrics)
 
         if 'dev_perf' in metrics:
             # print("\n Metrics provided for a dev epoch\n")
@@ -130,4 +127,4 @@ class MyLogger(LightningLoggerBase):
     #    pass
 
     def get_history(self):
-        return self.train_history, self.dev_history
+        return self.train_history, self.dev_history, self.test_history

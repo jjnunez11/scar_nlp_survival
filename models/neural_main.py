@@ -84,7 +84,7 @@ def neural_main(model_name, model_class, model_trainer, args):
 
     # Train and Evaluate Model
     if eval_only:
-        test_history, start = trainer.eval_only(test_dataloader)
+        test_history, start = trainer.eval_only(model_class, test_dataloader)
     else:
         train_history, dev_history, test_history, start_time = trainer.fit(train_dataloader,
                                                                            dev_dataloader,

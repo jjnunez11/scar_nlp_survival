@@ -73,6 +73,9 @@
 
 :: python -m models.bow --target "surv_mo_60_IV" --table "initial_stage_IV" --epochs 1
 
-python -m models.cnn --target "surv_mo_60" --eval_only --batch 2 --table_extra retr
 
-:: python -m models.bow --target "surv_mo_60" --epochs 1 --table "frwt" --eval_only
+:: python -m models.cnn --target "surv_mo_60" --eval_only --table_extra retr --model-file C:\Users\jjnunez\PycharmProjects\scar_nlp_survival\results\paper_submission\surv_mo_60\CNN\CNN_20220928-2210.pt
+:: python -m models.lstm --target "surv_mo_60" --eval_only --table_extra retr --model-file C:\Users\jjnunez\PycharmProjects\scar_nlp_survival\results\paper_submission\surv_mo_60\LSTM\LSTM_20220929-0009.pt
+:: python -m models.bow --target "surv_mo_60" --epochs 1 --table "frwt" --eval_only --model-file C:\Users\jjnunez\PycharmProjects\scar_nlp_survival\results\paper_submission\surv_mo_60\BoW\BoW_20220928-2054_e0.pbz2
+
+python -m models.bert --target "surv_mo_36" --table "check additions" --epochs 1

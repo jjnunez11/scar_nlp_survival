@@ -12,8 +12,13 @@ from tables.generate_n_token_fig import generate_n_token_fig
 
 
 def transformer_main(model_name, model_class, model_dataset, args):
-    print(f"Training and evaluating a {model_name} model")
-    model_name = model_name
+    # Check if we're loading and evaluating a model, or training and evaluating
+    eval_only = args.eval_only
+    if eval_only:
+        print(f"Loading and evaluating a {model_name} model")
+    else:
+        print(f"Training and evaluating a {model_name} model")
+
     start_time = datetime.datetime.now().strftime("%Y%m%d-%H%M")
 
     # Set Device
@@ -55,7 +60,7 @@ def transformer_main(model_name, model_class, model_dataset, args):
         sys.exit()
 
     # Instantiate our Model
-    steps_per_epoch = dataset.get_n_training()/config.batch_size
+    steps_per_epoch = dataset.get_n_training() / config.batch_size
     model = model_class(config, loss_fn, steps_per_epoch)
 
     # Make and create if needed dir for loggers to log to
@@ -71,7 +76,7 @@ def transformer_main(model_name, model_class, model_dataset, args):
     # saves a file like: input/BERT-epoch=02-val_loss=0.32.ckpt
     checkpoint_callback = ModelCheckpoint(
         monitor='val_bal',  # monitored quantity
-        filename= model_name + '-{epoch:02d}-{val_loss:.2f}',
+        filename=model_name + '-{epoch:02d}-{val_loss:.2f}',
         save_top_k=1,  # save the top 3 models
         mode='max',  # mode of the monitored quantity  for optimization
         dirpath=config.results_dir_model
@@ -90,14 +95,14 @@ def transformer_main(model_name, model_class, model_dataset, args):
     )
 
     trainer = TransformerTrainer(config=config,
-                          checkpoint_callback=checkpoint_callback,
-                          logger=[tb_logger, my_logger]
-    )
+                                 checkpoint_callback=checkpoint_callback,
+                                 logger=[tb_logger, my_logger]
+                                 )
 
     trainer.fit(model, dataset)
-    train_history, dev_history, start_time = trainer.get_results()
+    train_history, dev_history, test_history, start_time = trainer.get_results()
 
-    evaluator = Evaluator(model_name, dev_history, config, start_time)
+    evaluator = Evaluator(model_name, test_history, config, start_time)
 
     # Use evaluator to print the best epochs
     print('\nBest epoch for AUC:')
@@ -111,6 +116,3 @@ def transformer_main(model_name, model_class, model_dataset, args):
     evaluator.append_to_results()
 
     quit("All done!")
-
-
-

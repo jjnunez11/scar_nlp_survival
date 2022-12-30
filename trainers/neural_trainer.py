@@ -6,7 +6,6 @@ from utils import print_from_history
 from evaluators.calculate_metrics import add_epoch_perf
 import os
 from copy import deepcopy
-from models.cnn.model import CNN
 
 
 class NeuralTrainer(object):
@@ -188,7 +187,15 @@ class NeuralTrainer(object):
             return history
 
     def eval_only(self,
+                  model_class,
                   test_loader):
+        """
+        Loads and evaluates a previously trained model.
+
+        :param model_class: a CNN or LSTM
+        :param test_loader: to load the data from the test set.
+        :return: history object containing the performance metrics
+        """
 
         test_history = self.create_history_pd()
 
@@ -202,7 +209,7 @@ class NeuralTrainer(object):
 
         # Load model
         checkpoint = torch.load(self.model_file)
-        loading_model = CNN(config=checkpoint['config'])
+        loading_model = model_class(config=checkpoint['config'])
         loading_model.load_state_dict(checkpoint['model_state_dict'])
         loading_model.eval()
         loaded_model = loading_model.to(self.device)
