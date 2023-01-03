@@ -87,13 +87,14 @@ class MyLogger(LightningLoggerBase):
         # metrics is a dictionary of metric names and values
         # your code to record metrics goes here
 
-        print(metrics)
-
         if 'dev_perf' in metrics:
             dev_perf = metrics["dev_perf"]
             dev_perf["epoch"] = metrics["epoch"]
             self.dev_history = self.dev_history.append(dev_perf, ignore_index=True)
             self.dev_history.index.name = "epoch"
+
+        elif 'train_perf' in metrics:
+            pass
 
         elif 'train_perf_epoch' in metrics:
             train_perf = metrics["train_perf_epoch"]
@@ -106,6 +107,8 @@ class MyLogger(LightningLoggerBase):
             test_perf["epoch"] = metrics["epoch"]
             self.test_history = self.test_history.append(test_perf, ignore_index=True)
             self.test_history.index.name = "epoch"
+        else:
+            raise ValueError(f"Unexpected metrics, here they are: {metrics}")
 
         pass
 

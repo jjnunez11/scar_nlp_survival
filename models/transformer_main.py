@@ -99,16 +99,16 @@ def transformer_main(model_name, model_class, model_dataset, args):
         trainer.test(loaded_model, dataloaders=dataset)
     else:
         trainer.fit(model, dataset)
+        trainer.test(model, dataset)
     train_history, dev_history, test_history, start_time = trainer.get_results()
-    print(test_history)
     evaluator = Evaluator(model_name, test_history, config, start_time)
 
     # Use evaluator to print the best epochs
-    print('\nBest epoch for AUC:')
-    evaluator.print_best_auc()
+    # print('\nBest epoch for AUC:')
+    # evaluator.print_best_auc()
 
-    print('\nBest epoch for F1:')
-    evaluator.print_best_f1()
+    # print('\nBest epoch for F1:')
+    # evaluator.print_best_f1()
 
     # Write the run history, and update the master results file
     evaluator.write_result_history()

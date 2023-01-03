@@ -54,7 +54,7 @@ class BERT(pl.LightningModule):
         target_labels = batch['label']
 
         loss, pred_labels = self(input_ids, attention_mask, target_labels)
-        self.log('train_loss', loss, prog_bar=True, logger=True)
+        self.log('train_loss', loss, prog_bar=False, logger=False)
 
         return {"loss": loss, "predictions": pred_labels.detach(), "labels": target_labels}
 
@@ -74,9 +74,9 @@ class BERT(pl.LightningModule):
 
         # Keep balanced accuracy a full on torchmetrics module, as part of this class, for progress bar
         bal = self.tr_bal(pred_labels, target_labels_int)
-        self.log('tr_bal', bal, prog_bar=True, logger=False)
+        self.log('tr_bal', bal, prog_bar=False, logger=False)
 
-        print(f'\nTraining epoch completed, used {len(pred_labels)} examples')
+        # print(f'\nTraining epoch completed, used {len(pred_labels)} examples')
 
     def validation_step(self, batch, batch_idx):
         input_ids = batch['input_ids']
@@ -110,7 +110,7 @@ class BERT(pl.LightningModule):
         bal = self.val_bal(pred_labels, target_labels_int)
         self.log('val_bal', bal, prog_bar=True, logger=False)
 
-        print(f'\nValidation epoch completed, used {len(pred_labels)} examples')
+        # print(f'\nValidation epoch completed, used {len(pred_labels)} examples')
 
     def test_step(self, batch, batch_idx):
         input_ids = batch['input_ids']
@@ -122,11 +122,10 @@ class BERT(pl.LightningModule):
 
         return {"loss": loss, "predictions": pred_labels.detach(), "labels": target_labels}
 
-        return loss
-
     def test_epoch_end(self, output):
         # Take all the target and predicted labels from the epoch and flatten into 1-dim tensors,
         # then make target into int
+        print("test_epoch_end")
         try:
             pred_labels, target_labels = self.flatten_epoch_output(output)
         except:

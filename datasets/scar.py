@@ -43,9 +43,9 @@ class SCAR:
             self.n_test = len(f.readlines())
         f.close()
         # from old setting
-        warnings.warn("Warning, manually setting n_train to maintain comatability with previously trained model. "
-                      "Comment follow line if using new models")
-        self.n_train = 30953
+        # warnings.warn("Warning, manually setting n_train to maintain comatability with previously trained model. "
+        #              "Comment follow line if using new models")
+        # self.n_train = 30953
 
         # Create a dict with the lengths
         self.n_lines = {'train': self.n_train,
