@@ -84,4 +84,4 @@
 :: python -m models.cnn --target "surv_mo_60" --table "survival_all_models_repeat"
 :: python -m models.lstm --target "surv_mo_60" --table "survival_all_models_repeat"
 
-python -m models.bert --target "surv_mo_60_toy" --table "testing_1_epoch" --epochs 1
+:: python -m models.bert --target "surv_mo_60_toy" --table "testing_1_epoch" --epochs 1

@@ -74,7 +74,6 @@ class SCARTransformer(pl.LightningDataModule):
                         'dev': self.n_dev,
                         'test': self.n_test}
 
-
         self.debug = config.debug
 
         pretrained_model_path = os.path.join(config.pretrained_dir, config.pretrained_file)

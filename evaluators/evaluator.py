@@ -68,8 +68,8 @@ class Evaluator(object):
 
     def print_best_bal_acc(self):
         history = self.history
-        best_auc_epoch_idx = self.get_best_epoch_bal_acc_idx()
-        print_from_history(history, best_auc_epoch_idx, self.start, best_auc_epoch_idx, self.n_epochs)
+        best_bal_acc_epoch_idx = self.get_best_epoch_bal_acc_idx()
+        print_from_history(history, best_bal_acc_epoch_idx, self.start, best_bal_acc_epoch_idx, self.n_epochs)
 
     def print_best_f1(self):
         history = self.history
