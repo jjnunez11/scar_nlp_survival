@@ -113,7 +113,7 @@ class SCARTransformer(pl.LightningDataModule):
         file = open(f, "r")
 
         i = 0
-        for line in tqdm(file, desc=f'Reading in {f}'):
+        for line in tqdm(file):
             values = line.split("\t")
             assert len(values) == 2, "Reading a file, we found a line with multiple tabs"
             raw_label, raw_text = values[0], values[1]
