@@ -15,7 +15,7 @@ def generate_result_table(table):
 
     table_df = pd.DataFrame([])
 
-    for root, dirs, files in os.walk("../results"):
+    for root, dirs, files in os.walk("../results/final_results/"):
         for file in files:
             if file[-11:] == 'results.csv' and not('old_results' in root):
                 df = pd.read_csv(os.path.join(root, file))
@@ -58,8 +58,9 @@ def generate_result_table(table):
 if __name__ == "__main__":
 
     if True:  # all tables for paper
-        generate_result_table('survival_all_models')
-        generate_result_table('survival_dif_lengths')
+        # I didn't actually use this to put together the final paper results, fixed it now though
+        generate_result_table('survival_dif_lengths')   # use this for all results, just copy pasted for the
+        # different tables
 
     print("Printed table LaTeX string to file!")
 

@@ -25,6 +25,8 @@ See [evaluators](./evaluators) for the code used to evaluate models
 
 See [results](./results) for the final results and trained models
 
+See [tables](./results) for some code used to generate tables as the raw data used for tables
+
 For training the models on Windows, .bat files are provided that contain the command-line code,
 as found in the [bats](./bats) folder. Sorry, I had to use Windows, as IT didn't support Linux on their virtualization.
 
