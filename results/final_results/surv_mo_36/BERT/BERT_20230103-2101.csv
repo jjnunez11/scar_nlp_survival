@@ -1,0 +1,35 @@
+epoch,acc,bal_acc,auc,prec,rec,spec,f1,loss,ppv,npv,tp,fp,tn,fn,epoch
+0,0.7992064356803894,0.8153959512710571,0.9009335041046143,0.9174711108207703,0.7652352452278137,0.8655565977096558,0.8344666957855225,0.0,0.9174711108207703,0.6537028551101685,4847.0,436.0,2807.0,1487.0,20.0
+
+Run Arguments:
+cuda: True
+gpu: 0
+cuda_block: False
+epochs: 100
+seed: 3435
+patience: 5
+monitor_metric: bal_acc
+log_every: 10
+imbalance_fix: loss_weight
+data_dir: C:\Users\jjnunez\PycharmProjects\scar_nlp_data\data
+results_dir: C:\Users\jjnunez\PycharmProjects\scar_nlp_survival\results
+data_version: ppv4
+target: surv_mo_36
+table: survival_dif_lengths_extra
+table_extra: 36
+dataset: SCAR
+debug: False
+eval_only: False
+model_file: None
+max_tokens: 512
+lr: 5e-05
+weight_decay: 0.001
+batch_size: 8
+pretrained_dir: C:\Users\jjnunez\PycharmProjects\shared_data\models
+pretrained_file: bert-base-uncased
+hparams_file: None
+count_tokens: False
+device: cuda:0
+run_name: BERT_20230103-2101
+results_dir_target: C:\Users\jjnunez\PycharmProjects\scar_nlp_survival\results\surv_mo_36
+results_dir_model: C:\Users\jjnunez\PycharmProjects\scar_nlp_survival\results\surv_mo_36\BERT

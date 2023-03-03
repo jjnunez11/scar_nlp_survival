@@ -1,0 +1,37 @@
+epoch,acc,bal_acc,auc,prec,rec,spec,f1,loss,ppv,npv,tp,fp,tn,fn
+0,0.849326491355896,0.8564628958702087,0.9282808899879456,0.9771847128868103,0.8468543887138367,0.8660714030265808,0.9073634147644043,0.0,0.9771847345132744,0.4550106609808102,7067.0,165.0,1067.0,1278.0
+
+Run Arguments:
+cuda: True
+gpu: 0
+cuda_block: False
+epochs: 1
+seed: 3435
+patience: 5
+monitor_metric: bal_acc
+log_every: 10
+imbalance_fix: loss_weight
+data_dir: C:\Users\jjnunez\PycharmProjects\scar_nlp_data\data
+results_dir: C:\Users\jjnunez\PycharmProjects\scar_nlp_survival\results
+data_version: ppv4
+target: surv_mo_6
+table: survival_dif_lengths
+table_extra: 6
+dataset: SCAR
+debug: False
+eval_only: False
+model_file: None
+max_tokens: 5000
+use_idf: True
+classifier: l2logreg
+rf_estimators: 50
+elnet_l1_ratio: 0.67
+elnet_alpha: 0.1
+elnet_power_t: 0.01
+gbdt_estimators: 100
+gbdt_lr: 0.1
+gbdt_max_depth: 3
+l2logreg_c: 1
+run_name: BoW_20230101-1513
+results_dir_target: C:\Users\jjnunez\PycharmProjects\scar_nlp_survival\results\surv_mo_6
+results_dir_model: C:\Users\jjnunez\PycharmProjects\scar_nlp_survival\results\surv_mo_6\BoW

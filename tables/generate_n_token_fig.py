@@ -16,10 +16,6 @@ def generate_n_token_fig(model_name, config, dataset):
 
     train_data = dataset.train_dataset
     n_consults = len(train_data)
-
-    # n_consults = 1000 for testing
-
-    # token_counts = np.empty((n_consults, 10000))
     token_counts = np.empty(n_consults)
 
     for i in tqdm(range(n_consults)):
@@ -52,6 +48,3 @@ def generate_n_token_fig(model_name, config, dataset):
     plt.show()
 
     f_stats.close()
-
-    # f_stats.close()
-    print('hello')

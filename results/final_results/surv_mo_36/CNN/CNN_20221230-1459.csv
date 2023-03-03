@@ -1,0 +1,39 @@
+epoch,acc,bal_acc,auc,prec,rec,spec,f1,loss,ppv,npv,tp,fp,tn,fn
+0,0.8411819934844971,0.8377997875213623,0.9140942692756653,0.9056126475334167,0.8482791185379028,0.827320396900177,0.8760088682174683,0.2652629613876343,0.9056126748693747,0.7362788144895719,5373.0,560.0,2683.0,961.0
+
+Run Arguments:
+cuda: True
+gpu: 0
+cuda_block: False
+epochs: 100
+seed: 3435
+patience: 5
+monitor_metric: bal_acc
+log_every: 10
+imbalance_fix: loss_weight
+data_dir: C:\Users\jjnunez\PycharmProjects\scar_nlp_data\data
+results_dir: C:\Users\jjnunez\PycharmProjects\scar_nlp_survival\results
+data_version: ppv4
+target: surv_mo_36
+table: survival_dif_lengths
+table_extra: 36
+dataset: SCAR
+debug: False
+eval_only: True
+model_file: C:\Users\jjnunez\PycharmProjects\scar_nlp_survival\results\paper_submission\surv_mo_36\CNN\CNN_20220928-2141.pt
+mode: rand
+output_channel: 500
+words_dim: 300
+embed_dim: 300
+dropout: 0.8
+lr: 5e-05
+weight_decay: 0
+pretrained_dir: C:\Users\jjnunez\PycharmProjects\hedwig-data\embeddings\word2vec
+pretrained_file: GoogleNews-vectors-negative300.txt
+batch_size: 16
+device: cuda:0
+target_classes: 1
+vocab_size: 21689
+run_name: CNN_20221230-1459
+results_dir_target: C:\Users\jjnunez\PycharmProjects\scar_nlp_survival\results\surv_mo_36
+results_dir_model: C:\Users\jjnunez\PycharmProjects\scar_nlp_survival\results\surv_mo_36\CNN

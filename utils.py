@@ -19,8 +19,6 @@ def series_to_matrix(series):
     except TypeError:
         eval_list = a_list
 
-    # print(eval_list[0])
-
     matrix = np.row_stack(eval_list)
     return matrix
 

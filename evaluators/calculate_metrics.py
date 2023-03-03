@@ -75,7 +75,6 @@ def add_epoch_perf(target_labels, pred_labels, loss, history):
     to the history dataframe
     """
     to_append = calculate_metrics(pred_labels, target_labels, loss)
-    # to_append = move_to_device(to_append, "cpu")  # Need to move to CPU to bring to numpy array
 
     history = history.append(to_append, ignore_index=True)
     history.index.name = "epoch"  # only actually needs to be done once, but will just call again

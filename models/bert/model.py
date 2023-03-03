@@ -22,7 +22,6 @@ class BERT(pl.LightningModule):
         self.lr = config.lr
         self.loss_fn = loss_fn
         self.weight_decay = config.weight_decay
-        # self.device = config.device  # pl seems to default send to cuda:0, using this for metrics
 
         # Initialize the metrics
 

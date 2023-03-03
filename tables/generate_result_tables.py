@@ -57,29 +57,9 @@ def generate_result_table(table):
 
 if __name__ == "__main__":
 
-    # generate_result_table('survival_dif_lengths')
-    # generate_result_table('see_psych')
-    # generate_result_table('see_counselling')
-    # generate_result_table('compare_sexes')
-    # generate_result_table('need_emots_all_models')
-    # generate_result_table('need_infos_all_models')
-    # generate_result_table('need_emots_dif_n'
-    # generate_result_table('survival_all_models')
-    # generate_result_table('need_emots_dif_n')
-    # generate_result_table('need_infos_dif_n')
-    # generate_result_table('compare_n')
-    # generate_result_table('compare_stages')
-    # generate_result_table('survival_dif_lengths')
-
-    # generate_result_table("imbalance_fix")
-    # generate_result_table("compare_stages_emots")
-
     if True:  # all tables for paper
         generate_result_table('survival_all_models')
-        # generate_result_table('survival_dif_lengths')
-
-    # generate_result_table("compare_token_len")
-    # generate_result_table("lstm_tuning")
+        generate_result_table('survival_dif_lengths')
 
     print("Printed table LaTeX string to file!")
 

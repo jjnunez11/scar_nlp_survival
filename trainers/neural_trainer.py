@@ -65,10 +65,6 @@ class NeuralTrainer(object):
                 # Move data to GPU
                 inputs, targets = inputs.to(self.device), targets.to(self.device)
 
-                # If needed, print current balance
-                # print(f'For this batch, {targets.cpu().detach().numpy().sum()} / {
-                # len(targets.cpu().detach().numpy())} are 1')
-
                 # zero the gradient
                 self.optimizer.zero_grad()
 

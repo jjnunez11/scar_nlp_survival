@@ -31,10 +31,5 @@ def get_args():
     parser.add_argument('--pretrained_file', default='GoogleNews-vectors-negative300.txt')
     parser.add_argument('--results-path', type=str, default=os.path.join('results', 'reg_lstm'))
 
-    # Extra arguments for saving models etc, can implement later
-    # TODO_ parser.add_argument('--save-path', type=str, default=os.path.join('model_checkpoints', 'reg_lstm'))
-    # TODO_ parser.add_argument('--resume-snapshot', type=str)
-    # TODO_ parser.add_argument('--trained-model', type=str)
-
     args = parser.parse_args()
     return args

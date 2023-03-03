@@ -151,17 +151,13 @@ class SCARTransformer(pl.LightningDataModule):
         # For now, use a single array, but could make this binary
 
         if len(label_text) == 1 and float(label_text) == 0:
-            # return [1, 0]
             return [0]
         elif len(label_text) == 1 and float(label_text) == 1:
-            # return [0, 1]
             return [1]
         elif len(label_text) == 2 and label_text in ['10', '01']:
             if label_text == '10':
-                # return [1, 0]
                 return [0]
             elif label_text == '01':
-                # return [0, 1]
                 return [1]
         else:
             raise ValueError("Invalid target provided, current supports '0'/'1' or '10'/'01'")

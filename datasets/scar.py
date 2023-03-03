@@ -8,8 +8,6 @@ from torch.utils.data import DataLoader
 from torch.nn.utils.rnn import pad_sequence
 import torch
 import random
-import warnings
-
 
 class SCAR:
     DATASET_NAME = "SCAR"
@@ -22,6 +20,7 @@ class SCAR:
         if undersample:
             self.data_dir = os.path.join(data_root, target + "_undersampled")
             self.n_lines['train'] = 1815
+            raise NotImplementedError("Need to update undersampling")
         else:
             self.data_dir = os.path.join(data_root, target)
 
@@ -42,10 +41,6 @@ class SCAR:
         with open(self.f_test) as f:
             self.n_test = len(f.readlines())
         f.close()
-        # from old setting
-        # warnings.warn("Warning, manually setting n_train to maintain comatability with previously trained model. "
-        #              "Comment follow line if using new models")
-        # self.n_train = 30953
 
         # Create a dict with the lengths
         self.n_lines = {'train': self.n_train,
@@ -177,8 +172,6 @@ class SCAR:
         :param label: the string representation of the label, maybe '0'/'1' or '10'/'01'
         :return: float representation, 0 or 1. If need multi-label, will need to change to return a list etc.
         """
-
-        # print(f'Here is a label: {label} with type {type(label)}')
 
         if len(label) == 1:
             return float(label)

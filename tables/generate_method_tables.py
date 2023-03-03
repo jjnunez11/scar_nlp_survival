@@ -82,9 +82,6 @@ def generate_pt_demo_table():
 
 
 if __name__ == "__main__":
-    # generate_dspln_label_table()
-    # generate_need_label_table()
-    # generate_survival_label_table()
     generate_pt_demo_table()
 
     print("Table generation complete!")
